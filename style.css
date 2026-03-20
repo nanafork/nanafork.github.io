@@ -964,6 +964,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+
     .nav-content {
         padding: 1rem 1.5rem;
     }
@@ -1018,14 +1022,15 @@ footer {
     .btn {
         width: 100%;
         text-align: center;
+        padding: 0.7rem 1.5rem;
     }
 
     .name {
-        font-size: 2.5rem !important;
+        font-size: 2.2rem !important;
     }
 
     .role {
-        font-size: 1.2rem !important;
+        font-size: 1.1rem !important;
     }
 
     .about-grid {
@@ -1038,7 +1043,7 @@ footer {
     }
 
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     .social-links {
@@ -1052,8 +1057,16 @@ footer {
 }
 
 @media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
     .name {
-        font-size: 1.8rem !important;
+        font-size: 1.6rem !important;
+    }
+
+    .role {
+        font-size: 1.0rem !important;
     }
     
     .phd-text strong {
@@ -1061,6 +1074,10 @@ footer {
     }
 
     .section {
-        padding: 4rem 1rem;
+        padding: 3rem 1rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
     }
 }
