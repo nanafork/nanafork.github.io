@@ -1,0 +1,15 @@
+# Temporary/Scratch Files
+extract.py
+temp_docx_text.txt
+MastersRD-*.jpg
+temp_*.txt
+.antigravityignore
+
+# Assets that shouldn't be public (optional, keep if you want them on the site)
+# docx files or raw CVs if you only want the PDF linked
+# *.docx
+# *.pptx
+
+# OS files
+desktop.ini
+.DS_Store
