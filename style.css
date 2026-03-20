@@ -1041,6 +1041,11 @@ footer {
         font-size: 1.8rem;
     }
 
+    .social-links {
+        margin-top: 2rem;
+        gap: 1.5rem;
+    }
+
     .project-grid, .affiliations-grid {
         grid-template-columns: 1fr;
     }
