@@ -383,19 +383,13 @@ a {
 
 /* Main Layout */
 main {
-    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .section {
-    padding: 6rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Allow About section to be wider */
-#about.section {
-    max-width: 1600px;
+    padding: 6rem 0;
 }
 
 .section-title {
@@ -551,26 +545,27 @@ main {
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    gap: 3rem;
     align-items: flex-start;
     width: 100%;
+    margin: 0 auto;
 }
 
 .bio-card, .edu-card {
-    padding: 0;
+    padding: 1rem 0;
 }
 
 .bio-card p {
     margin-bottom: 1.2rem;
-    font-size: 1.15rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.7;
     color: var(--text-primary);
     text-align: justify;
 }
 
 .edu-card {
     border-left: 1px solid var(--glass-border);
-    padding-left: 5rem;
+    padding-left: 4rem;
 }
 
 .edu-list {
