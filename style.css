@@ -52,6 +52,13 @@
     font-family: 'Inter', sans-serif;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
 /* ===== LIGHTBOX ===== */
 .lightbox {
     display: none;
@@ -989,18 +996,6 @@ footer {
         display: flex;
     }
 
-    /* Burger Animation */
-    .mobile-menu-btn.toggle .bar:nth-child(1) {
-        transform: translateY(8.5px) rotate(45deg);
-    }
-    .mobile-menu-btn.toggle .bar:nth-child(2) {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    .mobile-menu-btn.toggle .bar:nth-child(3) {
-        transform: translateY(-8.5px) rotate(-45deg);
-    }
-
     .hero {
         flex-direction: column-reverse;
         text-align: center;
@@ -1013,17 +1008,24 @@ footer {
         align-items: center;
     }
 
+    .cta-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
     .name {
-        font-size: 2.8rem !important;
+        font-size: 2.5rem !important;
     }
 
     .role {
         font-size: 1.2rem !important;
-    }
-
-    .phd-badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
     }
 
     .about-grid {
@@ -1031,39 +1033,29 @@ footer {
         gap: 2rem;
     }
 
-    .bio-card, .edu-card {
-        padding: 2rem;
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
-    .project-grid {
+    .project-grid, .affiliations-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .affiliations-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-container {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
     }
 }
 
 @media (max-width: 480px) {
     .name {
-        font-size: 2.2rem !important;
+        font-size: 1.8rem !important;
     }
     
-    .publication-year h3 {
-        font-size: 1.5rem;
+    .phd-text strong {
+        font-size: 0.9rem;
     }
-    
-    .publication-item h4 {
-        font-size: 1.1rem;
+
+    .section {
+        padding: 4rem 1rem;
     }
 }
