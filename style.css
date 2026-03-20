@@ -847,19 +847,74 @@ main {
 .contact-method a {
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 1.05rem;
-    transition: color 0.3s ease;
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
 }
 
-.contact-method a:hover {
-    color: var(--accent-secondary);
+.contact-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.contact-detail-item i {
+    color: var(--accent-primary);
+    font-size: 1.2rem;
+}
+
+.link-hover {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.link-hover:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
 }
 
 .social-links {
-    margin-top: 3rem;
     display: flex;
     justify-content: center;
     gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    transition: all 0.3s cubic-bezier(0.1, 0.7, 0.6, 0.9);
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.email-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 280px;
+    margin-top: 1rem;
 }
 
 /* Footer */
@@ -1037,8 +1092,27 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .section-title {
-        font-size: 1.8rem;
+    .email-btn {
+        width: 100%;
+        min-width: unset;
+        font-size: 1.1rem;
+        padding: 1.2rem;
+    }
+
+    .contact-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .social-links {
+        gap: 1.2rem;
+    }
+
+    .social-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
     }
 
     .project-grid, .affiliations-grid {
