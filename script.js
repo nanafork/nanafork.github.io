@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const images = [
             'profile.jpeg',
             'Grad.jpeg',
+            'Grad1.jpeg',
             'Passport Photo_Albert.jpg'
         ];
         let currentIndex = 0;
