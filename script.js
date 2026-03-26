@@ -195,3 +195,28 @@ if (canvas) {
     }
     animate();
 }
+
+// Profile Picture Cycling
+document.addEventListener('DOMContentLoaded', () => {
+    const profilePic = document.getElementById('profile-pic');
+    if (profilePic) {
+        const images = [
+            'profile.jpeg',
+            'Grad.jpeg',
+            'Passport Photo_Albert.jpg'
+        ];
+        let currentIndex = 0;
+
+        setInterval(() => {
+            // Fade out
+            profilePic.style.opacity = 0;
+            
+            // Wait for fade out to finish, then change source and fade back in
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                profilePic.src = images[currentIndex];
+                profilePic.style.opacity = 1;
+            }, 500);
+        }, 5000); // Change image every 5 seconds
+    }
+});
