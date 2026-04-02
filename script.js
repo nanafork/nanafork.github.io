@@ -201,10 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const profilePic = document.getElementById('profile-pic');
     if (profilePic) {
         const images = [
-            'profile.jpeg',
             'Grad.jpeg',
-            'Grad1.jpeg',
-            'Passport Photo_Albert.jpg'
+            'Grad1.jpeg'
         ];
         let currentIndex = 0;
 
