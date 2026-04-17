@@ -20,6 +20,14 @@
         <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
         <img id="lightbox-img" src="" alt="Enlarged view">
     </div>
+
+    <!-- Article Modal -->
+    <div id="article-modal" class="lightbox" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="article-close" aria-label="Close">&times;</button>
+        <div class="article-modal-content glass-card" id="article-body">
+            <!-- Content injected via JS -->
+        </div>
+    </div>
     <nav class="navbar">
         <div class="nav-content">
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme" style="margin-left: 0;">
@@ -31,6 +39,7 @@
                 <li><a href="#affiliations">Affiliations</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
@@ -228,6 +237,61 @@
             </div>
         </section>
 
+        <section id="blog" class="blog section fade-in">
+            <h2 class="section-title">Research Updates</h2>
+            <div class="blog-grid">
+                <!-- Blog Card 1 -->
+                <div class="blog-card glass-card">
+                    <div class="blog-img-wrapper">
+                        <img src="Pipeline-of-drift-architecture.jpg" alt="Drift Detection">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="skill-tag" style="margin-right: 10px;">Machine Learning</span>
+                            <span class="blog-date">Oct 2026</span>
+                        </div>
+                        <h3>Exploring Drift Detection in Data Streams</h3>
+                        <p>A deep dive into the challenges of concept drift and how online LSTM architectures adapt to evolving patterns.</p>
+                        <button class="btn secondary read-article-btn" data-article="article-1">Read Article &rarr;</button>
+                        
+                        <div id="article-1" class="hidden-content" style="display: none;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Exploring Drift Detection in Continuous Data Streams</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 500;">October 2026 | Machine Learning | Concept Drift</p>
+                            <img src="Pipeline-of-drift-architecture.jpg" alt="Drift Architecture" style="width:100%; border-radius: 8px; margin-bottom: 2rem;">
+                            <p style="font-size: 1.1rem; line-height: 1.8;">Data streams are constantly changing. Concept drift occurs when the statistical properties of the target variable change over time in unforeseeable ways. This causes problems because the predictions become less accurate as time passes.</p>
+                            <p style="font-size: 1.1rem; line-height: 1.8;">In our recent research, we proposed a framework utilizing an online LSTM architecture augmented with drift-detection mechanisms to tackle this challenge. The memory-based Cuckoo Search (MCS) provided optimized feature selection to ensure only relevant attributes were tracked.</p>
+                            <p style="font-size: 1.1rem; line-height: 1.8;">Future iterations of this approach will look into integrating Vision Transformers (ViT) embeddings on visual data representations to identify multidimensional drift more accurately.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Card 2 -->
+                <div class="blog-card glass-card">
+                    <div class="blog-img-wrapper">
+                        <img src="covid ct.png" alt="Vision Transformers">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="skill-tag" style="margin-right: 10px;">Computer Vision</span>
+                            <span class="blog-date">Sep 2026</span>
+                        </div>
+                        <h3>The Rise of Vision Transformers in Healthcare</h3>
+                        <p>Discussing how the self-attention mechanism in ViTs is outperforming traditional CNNs for medical image anomaly detection.</p>
+                        <button class="btn secondary read-article-btn" data-article="article-2">Read Article &rarr;</button>
+
+                        <div id="article-2" class="hidden-content" style="display: none;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--accent-primary);">The Rise of Vision Transformers in Healthcare</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 500;">September 2026 | Computer Vision | ViT | Diagnostics</p>
+                            <img src="covid ct.png" alt="COVID CT Scan" style="width:100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 2rem;">
+                            <p style="font-size: 1.1rem; line-height: 1.8;">For years, Convolutional Neural Networks (CNNs) have been the gold standard for computer vision tasks, especially in medical imaging. However, Vision Transformers (ViTs) are changing the paradigm.</p>
+                            <p style="font-size: 1.1rem; line-height: 1.8;">By applying self-attention mechanisms globally across image patches, ViTs are able to contextualize information better than localized convolution filters. Our study utilizing a Bootstrapped ViT-B16 model for SARS detection in chest CT scans achieved significant robustness and sensitivity compared to traditional baselines.</p>
+                            <p style="font-size: 1.1rem; line-height: 1.8;">Deploying these models in clinical settings still requires addressing computational complexity and model interpretability, which is currently our lab's active area of investigation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="affiliations" class="affiliations section fade-in">
             <h2 class="section-title">Communities & Affiliations</h2>
             <div class="affiliations-grid">
@@ -257,11 +321,23 @@
                 <div class="contact-methods">
                     <div class="contact-method">
                         <strong>Personal Email</strong>
-                        <a href="mailto:albertankad@gmail.com">albertankad@gmail.com</a>
+                        <div class="email-row">
+                            <a href="mailto:albertankad@gmail.com">albertankad@gmail.com</a>
+                            <button class="copy-email-btn" data-email="albertankad@gmail.com" aria-label="Copy email address" title="Copy to clipboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span>Copy</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="contact-method">
                         <strong>Student Email</strong>
-                        <a href="mailto:aadodoo003@st.ug.edu.gh">aadodoo003@st.ug.edu.gh</a>
+                        <div class="email-row">
+                            <a href="mailto:aadodoo003@st.ug.edu.gh">aadodoo003@st.ug.edu.gh</a>
+                            <button class="copy-email-btn" data-email="aadodoo003@st.ug.edu.gh" aria-label="Copy email address" title="Copy to clipboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span>Copy</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="contact-method">
                         <strong>Phone</strong>
@@ -269,7 +345,32 @@
                     </div>
                 </div>
 
-                <a href="mailto:albertankad@gmail.com" class="btn primary">Send me an email</a>
+                <!-- Contact Form -->
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" name="email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="subject" placeholder="e.g. PhD Collaboration, Research Inquiry" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary form-submit-btn">
+                        <span id="form-btn-text">Send Message</span>
+                        <svg id="form-btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                    <p id="form-status" class="form-status" aria-live="polite"></p>
+                </form>
                 
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/albert-ankomah-dodoo/" target="_blank" class="social-icon">LinkedIn</a>

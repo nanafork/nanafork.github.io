@@ -196,7 +196,75 @@ if (canvas) {
     animate();
 }
 
-// Profile Picture Cycling
+// ===== COPY EMAIL BUTTONS =====
+document.querySelectorAll('.copy-email-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const email = btn.dataset.email;
+        navigator.clipboard.writeText(email).then(() => {
+            const span = btn.querySelector('span');
+            btn.classList.add('copied');
+            span.textContent = 'Copied!';
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                span.textContent = 'Copy';
+            }, 2000);
+        });
+    });
+});
+
+// ===== CONTACT FORM =====
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const fields = ['contact-name', 'contact-email', 'contact-subject', 'contact-message'];
+        let valid = true;
+
+        fields.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el.value.trim()) {
+                el.classList.add('invalid');
+                valid = false;
+            } else {
+                el.classList.remove('invalid');
+            }
+        });
+
+        const emailEl = document.getElementById('contact-email');
+        if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+            emailEl.classList.add('invalid');
+            valid = false;
+        }
+
+        const status = document.getElementById('form-status');
+        if (!valid) {
+            status.textContent = 'Please fill in all fields correctly.';
+            status.className = 'form-status error';
+            return;
+        }
+
+        // Build mailto link with form data
+        const name    = document.getElementById('contact-name').value.trim();
+        const email   = document.getElementById('contact-email').value.trim();
+        const subject = document.getElementById('contact-subject').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+
+        const body = `Name: ${name}\nFrom: ${email}\n\n${message}`;
+        const mailto = `mailto:albertankad@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+
+        status.textContent = 'Opening your email client...';
+        status.className = 'form-status success';
+        contactForm.reset();
+        setTimeout(() => { status.textContent = ''; status.className = 'form-status'; }, 4000);
+    });
+
+    // Remove invalid state on input
+    contactForm.querySelectorAll('input, textarea').forEach(el => {
+        el.addEventListener('input', () => el.classList.remove('invalid'));
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const profilePic = document.getElementById('profile-pic');
     if (profilePic) {
