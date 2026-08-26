@@ -946,36 +946,6 @@ main {
     flex-shrink: 0;
 }
 
-/* Education Items */
-.edu-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.edu-item:last-child {
-    border-bottom: none;
-}
-
-.edu-logo {
-    width: 52px;
-    height: 52px;
-    object-fit: contain;
-    border-radius: 10px;
-    background: var(--glass-bg);
-    padding: 4px;
-    border: 1px solid var(--glass-border);
-    flex-shrink: 0;
-}
-
-.edu-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-}
-
 /* Footer */
 footer {
     text-align: center;
