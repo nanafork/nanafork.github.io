@@ -639,6 +639,77 @@ main {
     color: var(--accent-primary);
 }
 
+/* News Section */
+.news-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+.news-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-primary), transparent);
+}
+
+.news-item {
+    position: relative;
+    padding-left: 4.5rem;
+    margin-bottom: 3rem;
+}
+
+.news-item:last-child {
+    margin-bottom: 0;
+}
+
+.news-year {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42px;
+    height: 42px;
+    background: var(--glass-bg);
+    border: 2px solid var(--accent-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    z-index: 1;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.news-item:hover .news-year {
+    transform: scale(1.1);
+    background: var(--accent-primary);
+    color: #fff;
+}
+
+.news-content {
+    padding: 1.8rem;
+}
+
+.news-content h3 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.news-content p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin: 0;
+    line-height: 1.7;
+}
+
 /* Affiliations Section */
 .affiliations-grid {
     display: grid;
