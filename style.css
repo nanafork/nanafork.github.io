@@ -1123,6 +1123,23 @@ footer {
         display: flex;
     }
 
+    .mobile-menu-btn.toggle .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.toggle .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.toggle .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .profile-pic {
+        width: 240px;
+        height: 240px;
+    }
+
     .hero {
         flex-direction: column-reverse;
         text-align: center;
