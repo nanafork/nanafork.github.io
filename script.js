@@ -219,3 +219,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000); // Change image every 5 seconds
     }
 });
+
+// ===== GALLERY CAROUSEL =====
+(function () {
+    const track     = document.getElementById('carousel-track');
+    const prevBtn   = document.getElementById('carousel-prev');
+    const nextBtn   = document.getElementById('carousel-next');
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    if (!track) return;
+
+    const slides = Array.from(track.children);
+    const total  = slides.length;
+    let current  = 0;
+    let autoTimer;
+
+    // Build dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-dot');
+        dot.setAttribute('aria-label', `Slide ${i + 1}`);
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.children);
+
+    function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function goNext() { goTo(current + 1); }
+    function goPrev() { goTo(current - 1); }
+
+    nextBtn.addEventListener('click', goNext);
+    prevBtn.addEventListener('click', goPrev);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') goNext();
+        if (e.key === 'ArrowLeft')  goPrev();
+    });
+
+    // Auto-advance every 4 seconds
+    function startAuto() {
+        autoTimer = setInterval(goNext, 4000);
+    }
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    track.closest('.carousel-wrapper').addEventListener('mouseenter', stopAuto);
+    track.closest('.carousel-wrapper').addEventListener('mouseleave', startAuto);
+
+    startAuto();
+})();
