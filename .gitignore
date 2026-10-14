@@ -12,3 +12,5 @@ temp_*.txt
 # OS files
 desktop.ini
 .DS_Store
+backup_original/
+.vscode/

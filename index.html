@@ -2,304 +2,520 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albert Ankomah Dodoo | Portfolio</title>
-    <meta name="description" content="Portfolio of Albert Ankomah Dodoo, Machine Learning Researcher.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>About Me - Albert Ankomah Dodoo</title>
+    <meta name="description" content="Academic portfolio and research profile of Albert Ankomah Dodoo — Machine Learning Researcher specializing in Adaptive Learning, Concept Drift, Swarm Intelligence, and Computer Vision.">
+    <meta name="author" content="Albert Ankomah Dodoo">
+
+    <!-- Open Graph SEO -->
+    <meta property="og:locale" content="en-US">
+    <meta property="og:site_name" content="Albert Ankomah Dodoo">
+    <meta property="og:title" content="About Me - Albert Ankomah Dodoo">
+    <meta property="og:description" content="Machine Learning Researcher | Adaptive ML, Swarm Intelligence, Concept Drift Detection, and Computer Vision. Exploring Fall '27 PhD Opportunities.">
+    <meta property="og:type" content="website">
+
+    <!-- Font Awesome & Academicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <canvas id="neural-net"></canvas>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
-        <img id="lightbox-img" src="" alt="Enlarged view">
-    </div>
-    <nav class="navbar">
-        <div class="nav-content">
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme" style="margin-left: 0;">
-                <span id="theme-icon">☀️</span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#affiliations">Affiliations</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </div>
-    </nav>
-
-    <main>
-        <section id="hero" class="hero fade-in">
-            <div class="hero-content">
-                <h1 class="name" style="font-size: 3rem; color: var(--accent-primary);">Albert Ankomah Dodoo</h1>
-                <h2 class="role" style="font-size: 1.2rem;">Research Assistant @<span style="color: var(--accent-primary);">Data Intelligence and Swarm Analytics Laboratory</span> | Founder @<span style="color: var(--accent-primary);">Cortex Consult</span></h2>
-                <p class="bio" style="font-size: 1.15rem; color: var(--text-secondary); letter-spacing: 0.5px;">Machine Learning Research | Adaptive ML | Continual Learning</p>
-                <div class="cta-group">
-                    <a href="Curriculum Vitae_Albert Ankomah Dodoo.pdf" target="_blank" class="btn primary">Download CV</a>
-                    <a href="#contact" class="btn secondary">Contact Me</a>
-                </div>
+    <!-- Top Fixed Masthead (Navbar) -->
+    <div class="masthead">
+        <div class="masthead__inner-wrap">
+            <div class="masthead__menu">
+                <nav id="site-nav" class="greedy-nav">
+                    <a class="masthead-title" href="#">Albert Ankomah Dodoo</a>
+                    <button class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle navigation menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="visible-links" id="nav-menu">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#research-vision">Research Vision</a></li>
+                        <li><a href="#publications">Publications</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#talks">Talks</a></li>
+                        <li><a href="#affiliations">Affiliations</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="My Curriculum Vitae.pdf" target="_blank" class="cv-link-btn"><i class="fas fa-file-pdf"></i> CV</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="hero-visual">
-                <!-- Profile Picture Placeholder -->
-                <img src="Grad.jpeg" id="profile-pic" alt="Albert Ankomah Dodoo" class="profile-pic" style="transition: opacity 0.5s ease-in-out;">
-                
-                <div class="phd-badge">
-                    <div class="status-indicator"></div>
-                    <div class="phd-text">
-                        <strong>Seeking PhD Roles</strong>
-                        <span>Exploring Fall '27 Opportunities</span>
+        </div>
+    </div>
+
+    <!-- Main Layout: Sticky Sidebar + Main Reading Content -->
+    <div id="main" role="main">
+        <!-- Sticky Author Sidebar -->
+        <aside class="sidebar sticky">
+            <div class="sidebar-inner-wrap" itemscope itemtype="http://schema.org/Person">
+                <div class="author__avatar">
+                    <img src="Grad.jpeg" alt="Albert Ankomah Dodoo" itemprop="image">
+                </div>
+
+                <div class="author__content">
+                    <h3 class="author__name" itemprop="name">Albert Ankomah Dodoo</h3>
+                    <p class="author__bio" itemprop="description">
+                        Machine Learning Researcher<br>
+                        Research Assistant @ DISA Lab<br>
+                        Founder @ Cortex Consult
+                    </p>
+                    <div class="phd-badge" title="Actively exploring PhD positions">
+                        <span class="status-dot"></span>
+                        <span>Seeking Fall '27 PhD Roles</span>
                     </div>
                 </div>
-            </div>
 
-        </section>
+                <div class="author__urls-wrapper">
+                    <button class="btn-follow" id="follow-toggle-btn">
+                        <i class="fas fa-address-card icon-pad-right"></i> Contact & Profiles
+                    </button>
+                    <ul class="author__urls social-icons" id="author-urls">
+                        <!-- Location & Institution -->
+                        <li>
+                            <i class="fa-solid fa-location-dot icon-pad-right" aria-hidden="true"></i>
+                            <span>Accra, Ghana</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-building-columns icon-pad-right" aria-hidden="true"></i>
+                            <span>University of Ghana</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-flask icon-pad-right" aria-hidden="true"></i>
+                            <span>DISA Laboratory</span>
+                        </li>
 
-        <section id="about" class="section fade-in">
-            <h2 class="section-title">Summary</h2>
-            <div class="about-grid">
-                <!-- Bio Column -->
-                <div class="bio-card">
-                    <p>I am a Machine Learning researcher with expertise in adaptive learning, pattern recognition, swarm intelligence, and computer vision. I am interested in exploring Adaptive Multimodal Learning, Concept Drift Detection, and Trustworthy AI. I have mentored undergraduate students interested in machine learning research and its application in agriculture, public health and security.</p>
+                        <!-- Email Contacts -->
+                        <li>
+                            <a href="mailto:albertankad@gmail.com" itemprop="email">
+                                <i class="fas fa-fw fa-envelope icon-pad-right" aria-hidden="true"></i>
+                                <span>albertankad@gmail.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:aadodoo003@st.ug.edu.gh">
+                                <i class="fas fa-fw fa-graduation-cap icon-pad-right" aria-hidden="true"></i>
+                                <span>aadodoo003@st.ug.edu.gh</span>
+                            </a>
+                        </li>
+
+                        <!-- Phone -->
+                        <li>
+                            <a href="tel:+233548094935">
+                                <i class="fas fa-fw fa-phone icon-pad-right" aria-hidden="true"></i>
+                                <span>+233 54 809 4935</span>
+                            </a>
+                        </li>
+
+                        <!-- Academic & Social Profiles -->
+                        <li>
+                            <a href="https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
+                                <i class="ai ai-google-scholar icon-pad-right" aria-hidden="true"></i>
+                                <span>Google Scholar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://orcid.org/my-orcid?orcid=0009-0005-5912-2699" target="_blank" rel="noopener">
+                                <i class="ai ai-orcid icon-pad-right" aria-hidden="true"></i>
+                                <span>ORCiD</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/albert-ankomah-dodoo/" target="_blank" rel="noopener">
+                                <i class="fab fa-fw fa-linkedin icon-pad-right" aria-hidden="true"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/nanafork" target="_blank" rel="noopener">
+                                <i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="My Curriculum Vitae.pdf" target="_blank">
+                                <i class="fas fa-fw fa-file-pdf icon-pad-right" aria-hidden="true"></i>
+                                <span>Curriculum Vitae</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+        </aside>
 
-                <!-- Education Column -->
-                <div class="edu-card">
-                    <div class="edu-column">
-                        <h3>🎓 Academic Background</h3>
-                        <div class="edu-list">
-                            <div class="edu-item">
-                                <span class="degree">MSc in Computer Science</span>
-                                <span class="uni">University of Ghana</span>
-                                <span class="year">September 2024 — September 2025</span>
+        <!-- Main Page Content -->
+        <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+            <div class="page__inner-wrap">
+                <header>
+                    <h1 class="page__title" id="about" itemprop="headline">About Me</h1>
+                </header>
+
+                <section class="page__content" itemprop="text">
+                    <!-- Bio Introduction -->
+                    <p>
+                        I am a Machine Learning Researcher at the <a href="#affiliations">Data Intelligence and Swarm Analytics Laboratory (DISA Lab)</a> in the <a href="https://www.ug.edu.gh" target="_blank" rel="noopener">Department of Computer Science, University of Ghana</a>, and Founder at <strong>Cortex Consult</strong>. My core research interests span <strong>Adaptive Machine Learning</strong>, <strong>Concept Drift Detection</strong>, <strong>Swarm Intelligence / Metaheuristic Optimization</strong>, and <strong>Computer Vision</strong>.
+                    </p>
+                    <p>
+                        I have mentored undergraduate students conducting machine learning research applied to real-world challenges in public health diagnostics, financial cybersecurity, and agriculture.
+                    </p>
+                    <p>
+                        <strong>PhD Candidacy:</strong> I am actively seeking and exploring <strong>PhD positions for Fall 2027</strong> in Computer Science and Machine Learning. If your lab is working on adaptive learning, streaming data drift detection, or vision transformers, please feel free to <a href="#contact">reach out</a>!
+                    </p>
+
+                    <!-- Academic Background -->
+                    <div class="academic-background">
+                        <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-graduation-cap" style="color: var(--primary-color); margin-right: 0.4rem;"></i> Academic Background</h3>
+                        <ul class="academic-list">
+                            <li class="academic-item">
+                                <div>
+                                    <span class="academic-degree">MSc in Computer Science</span> &mdash;
+                                    <span class="academic-sub">University of Ghana</span>
+                                </div>
+                                <span class="academic-date">Sep 2024 &mdash; Sep 2025</span>
+                            </li>
+                            <li class="academic-item">
+                                <div>
+                                    <span class="academic-degree">BSc in Computer Science</span> &mdash;
+                                    <span class="academic-sub">University of Ghana</span>
+                                </div>
+                                <span class="academic-date">Aug 2019 &mdash; Sep 2023</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- News Section -->
+                    <h2 id="news" class="section-anchor">News</h2>
+                    <ul class="news-list">
+                        <li>
+                            <span class="news-date">Sep 2026:</span>
+                            Invited to present a research talk at the <a href="https://research.google/" target="_blank" rel="noopener">Google AI Community Center (AICC)</a> as part of their monthly Student Research Tech Talk series.
+                        </li>
+                        <li>
+                            <span class="news-date">Aug 2026:</span>
+                            Attended and engaged in workshops at the <a href="https://deeplearningindaba.com/" target="_blank" rel="noopener">Deep Learning Indaba</a> in Lagos, Nigeria.
+                        </li>
+                        <li>
+                            <span class="news-date">Jul 2026:</span>
+                            Selected for the <a href="https://www.acvss.ai/" target="_blank" rel="noopener">African Computer Vision Summer School (ACVSS)</a> hosted at the Google AI Community Center.
+                        </li>
+                    </ul>
+
+                    <!-- Research Vision Section -->
+                    <h2 id="research-vision" class="section-anchor">Research Vision</h2>
+                    <p>
+                        My long-term research goal is to advance <strong>adaptive, drift-resilient, and trustworthy artificial intelligence systems</strong> capable of continuous online learning in non-stationary streaming environments.
+                    </p>
+                    <p>
+                        In many real-world settings—from financial transactions to streaming sensor signals and automated healthcare diagnostics—underlying data distributions inevitably shift over time (concept drift). By fusing bio-inspired swarm optimization (such as Memory-Based Cuckoo Search) with incremental sequential deep architectures (such as Online LSTMs and Vision Transformers), I strive to create machine learning solutions that adapt dynamically in real-time, preserve past knowledge, and maintain high predictive integrity without necessitating computationally prohibitive offline retraining cycles.
+                    </p>
+
+                    <!-- Selected Publications Section -->
+                    <h2 id="publications" class="section-anchor">Selected Publications</h2>
+                    <div class="selected-publications">
+
+                        <!-- Category 1 -->
+                        <h3 class="publication-category">Healthcare & Computer Vision</h3>
+                        
+                        <article class="publication">
+                            <h4 class="publication__title">SARS Detection in Chest CT-Scan Images Using Bootstrapped ViT-B16 Model</h4>
+                            <div class="publication__info">
+                                <p class="pub-authors">
+                                    <i>Appati, K.J., Ziamah, B., Akrofi, H.A., &amp; <strong>Dodoo, A.A.</strong></i>
+                                </p>
+                                <p class="pub-venue">
+                                    Springer, <em>Iran Journal of Computer Science</em> (2025)
+                                </p>
+                                <div class="pub-links">
+                                    <a href="https://doi.org/10.1007/s42044-025-00231-1" target="_blank" rel="noopener" class="pub-link-badge">
+                                        <i class="fas fa-external-link-alt"></i> Paper (DOI)
+                                    </a>
+                                </div>
                             </div>
-                            <div class="edu-item">
-                                <span class="degree">BSc in Computer Science</span>
-                                <span class="uni">University of Ghana</span>
-                                <span class="year">August 2019 — September 2023</span>
+                            <figure class="publication__media">
+                                <img src="ViT Architecture.png" alt="ViT Architecture for SARS and COVID CT-Scan Detection" loading="lazy" class="enlargeable-img">
+                            </figure>
+                        </article>
+
+                        <!-- Category 2 -->
+                        <h3 class="publication-category">Adaptive Machine Learning & Non-Stationary Data Streams</h3>
+
+                        <article class="publication">
+                            <h4 class="publication__title">Adaptive Memory-Based Cuckoo Search for High-Dimensional Feature Optimization in Non-Stationary Fraud Detection Systems</h4>
+                            <div class="publication__info">
+                                <p class="pub-authors">
+                                    <i>Appati, K.J., <strong>Dodoo, A.A.</strong>, Amissah, D.K., Boante, L.M., Ludu, J.Y., &amp; Soli, M.A.T.</i>
+                                </p>
+                                <p class="pub-venue">
+                                    <em>Under Review / Manuscript</em> (2026)
+                                </p>
+                                <div class="pub-links">
+                                    <span class="pub-link-badge"><i class="fas fa-file-alt"></i> Manuscript</span>
+                                    <span class="pub-link-badge"><i class="fas fa-sync-alt"></i> Online LSTM + ADWIN/EDDM</span>
+                                </div>
+                            </div>
+                            <figure class="publication__media">
+                                <img src="Pipeline-of-drift-architecture.jpg" alt="Pipeline of Drift Architecture for Credit Card Fraud Detection" loading="lazy" class="enlargeable-img">
+                            </figure>
+                        </article>
+
+                        <!-- Category 3 -->
+                        <h3 class="publication-category">Cybersecurity & Feature Engineering</h3>
+
+                        <article class="publication">
+                            <h4 class="publication__title">Resampled Correlation-Based Feature Descriptors: A Novel Approach to Enhancing Malware Detection Capabilities</h4>
+                            <div class="publication__info">
+                                <p class="pub-authors">
+                                    <i><strong>Dodoo, A.A.</strong>, Koranteng, M., Amissah, D.K., &amp; Appati, K.J.</i>
+                                </p>
+                                <p class="pub-venue">
+                                    Preprint at <em>Research Square</em> (2023)
+                                </p>
+                                <div class="pub-links">
+                                    <a href="https://doi.org/10.21203/rs.3.rs-4219089/v1" target="_blank" rel="noopener" class="pub-link-badge">
+                                        <i class="fas fa-external-link-alt"></i> Paper (DOI)
+                                    </a>
+                                </div>
+                            </div>
+                            <figure class="publication__media">
+                                <img src="feature_selection.png" alt="Feature Selection and Methodology Correlation for Malware Detection" loading="lazy" class="enlargeable-img">
+                            </figure>
+                        </article>
+
+                        <!-- Category 4 -->
+                        <h3 class="publication-category">Generative Models & Biometrics</h3>
+
+                        <article class="publication">
+                            <h4 class="publication__title">Adapting Triple BigGAN for Image Detection Tasks: Challenges and Opportunities</h4>
+                            <div class="publication__info">
+                                <p class="pub-authors">
+                                    <i>Quaicoo, R., Acheampong, R., Gyamenah, P., <strong>Dodoo, A.A.</strong>, Soli, M.A.T., &amp; Appati, K.J.</i>
+                                </p>
+                                <p class="pub-venue">
+                                    Preprint at <em>Research Square</em> (2023)
+                                </p>
+                                <div class="pub-links">
+                                    <a href="https://doi.org/10.21203/rs.3.rs-4262097/v1" target="_blank" rel="noopener" class="pub-link-badge">
+                                        <i class="fas fa-external-link-alt"></i> Paper (DOI)
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="publication">
+                            <h4 class="publication__title">Enhancing Unsupervised Signature Verification Through Advanced Feature Extraction Techniques</h4>
+                            <div class="publication__info">
+                                <p class="pub-authors">
+                                    <i>Tetteh, L.M., Sarfo, O.Y., Amissah, D.K., <strong>Dodoo, A.A.</strong>, Soli, M.A.T., &amp; Appati, K.J.</i>
+                                </p>
+                                <p class="pub-venue">
+                                    Preprint at <em>Research Square</em> (2023)
+                                </p>
+                                <div class="pub-links">
+                                    <a href="https://doi.org/10.21203/rs.3.rs-4249016/v1" target="_blank" rel="noopener" class="pub-link-badge">
+                                        <i class="fas fa-external-link-alt"></i> Paper (DOI)
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <!-- Selected Projects Section -->
+                    <h2 id="projects" class="section-anchor">Selected Projects</h2>
+                    <div class="projects-container">
+                        
+                        <!-- Project 1 -->
+                        <div class="project-card">
+                            <h4 class="project-title">Adaptive Drift-Aware Credit Card Fraud Detection Framework</h4>
+                            <div class="project-info">
+                                <span class="project-tag">LSTM &amp; Swarm Intelligence</span>
+                                <p>
+                                    Developed a drift-aware Credit Card Fraud (CCF) detection framework leveraging an online Long Short-Term Memory (LSTM) architecture integrated with ADWIN and EDDM drift monitors. Engineered a Memory-Based Cuckoo Search (MCS) metaheuristic algorithm for high-dimensional feature selection and integrated MAHAKIL chromosomal-oversampling to conquer extreme class imbalance (>99% accuracy across European cardholder benchmark datasets).
+                                </p>
+                            </div>
+                            <div class="project-gallery">
+                                <img src="Pipeline-of-drift-architecture.jpg" alt="Drift Architecture Pipeline" class="enlargeable-img" title="Click to enlarge">
+                                <img src="MastersRD-MAHAKIL.jpg" alt="MAHAKIL Oversampling Process" class="enlargeable-img" title="Click to enlarge">
+                                <img src="MastersRD-Memory-Based-Cuckoo-Search-Optimization.jpg" alt="Memory-Based Cuckoo Search" class="enlargeable-img" title="Click to enlarge">
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card">
+                            <h4 class="project-title">ViT COVID-19 &amp; SARS Detection Application</h4>
+                            <div class="project-info">
+                                <span class="project-tag">Vision Transformers &amp; Healthcare</span>
+                                <p>
+                                    Mentored and collaborated with undergraduate researchers on computer vision architectures applying Bootstrapped Vision Transformers (ViT-B16) to chest CT-scan slices, facilitating accurate and early identification of pulmonary SARS and COVID-19 lesions.
+                                </p>
+                            </div>
+                            <div class="project-gallery">
+                                <img src="ViT Architecture.png" alt="ViT Architecture" class="enlargeable-img" title="Click to enlarge">
+                                <img src="pipeline_sars.png" alt="SARS Pipeline" class="enlargeable-img" title="Click to enlarge">
+                                <img src="covid ct.png" alt="Chest CT Scans" class="enlargeable-img" title="Click to enlarge">
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-card">
+                            <h4 class="project-title">Malware Detection via Resampled Correlation Descriptors &amp; LSTM</h4>
+                            <div class="project-info">
+                                <span class="project-tag">Deep Learning &amp; Cybersecurity</span>
+                                <p>
+                                    Constructed a recurrent deep learning pipeline utilizing resampled correlation-based feature descriptors to capture subtle behavioral anomalies in mobile malware, achieving 98% classification accuracy over benchmark threat repositories.
+                                </p>
+                            </div>
+                            <div class="project-gallery">
+                                <img src="feature_selection.png" alt="Feature Selection Methodology" class="enlargeable-img" title="Click to enlarge">
+                                <img src="methodology_correlation.png" alt="Correlation Descriptors" class="enlargeable-img" title="Click to enlarge">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Talks & Gallery Section -->
+                    <h2 id="talks" class="section-anchor">Talks &amp; Research Gallery</h2>
+                    <p>
+                        Presentations, academic engagements, and student mentorship sessions at the Google AI Community Center (AICC) and international research venues.
+                    </p>
+
+                    <div class="talks-carousel">
+                        <button class="carousel-nav-btn carousel-prev" id="carousel-prev" aria-label="Previous slide">&#8249;</button>
+                        
+                        <div class="talks-track-wrap">
+                            <div class="talks-track" id="carousel-track">
+                                <div class="talks-slide">
+                                    <img src="AICC Research Talk 1.jpeg" alt="Research Talk at Google AICC" class="enlargeable-img">
+                                    <div class="talks-caption">Research Talk at Google AI Community Center (AICC) &mdash; Student Research Tech Talk (Sep 2026)</div>
+                                </div>
+                                <div class="talks-slide">
+                                    <img src="AICC Research Talk 2.jpeg" alt="Interactive Research Discussion at Google AICC" class="enlargeable-img">
+                                    <div class="talks-caption">Discussion and Q&amp;A Session with researchers and students at Google AICC</div>
+                                </div>
+                                <div class="talks-slide">
+                                    <img src="AICC Research Talk 3.jpeg" alt="Presentation Slides at Google AICC" class="enlargeable-img">
+                                    <div class="talks-caption">Technical presentation on Adaptive Machine Learning and Swarm Intelligence</div>
+                                </div>
+                                <div class="talks-slide">
+                                    <img src="Research Talk 4.jpeg" alt="Academic Research Engagement" class="enlargeable-img">
+                                    <div class="talks-caption">Academic Research Engagement &mdash; Department of Computer Science, University of Ghana</div>
+                                </div>
+                                <div class="talks-slide">
+                                    <img src="Research Talk 5.jpeg" alt="Research Seminar Discussion" class="enlargeable-img">
+                                    <div class="talks-caption">Seminar and Student Mentorship in Pattern Recognition and Machine Learning</div>
+                                </div>
+                                <div class="talks-slide">
+                                    <img src="Research Talk 6.jpeg" alt="Academic Conference Session" class="enlargeable-img">
+                                    <div class="talks-caption">Interactive Research Exchange and Academic Dialogue</div>
+                                </div>
+                                <div class="talks-slide">
+                                    <img src="Research Talk 7.jpeg" alt="Research Collaboration" class="enlargeable-img">
+                                    <div class="talks-caption">Research Collaboration at University of Ghana</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-nav-btn carousel-next" id="carousel-next" aria-label="Next slide">&#8250;</button>
+
+                        <div class="carousel-dots" id="carousel-dots"></div>
+                    </div>
+
+                    <!-- Communities & Affiliations Section -->
+                    <h2 id="affiliations" class="section-anchor">Communities &amp; Affiliations</h2>
+                    <div class="affiliations-grid">
+                        <div class="affiliation-item">
+                            <img src="University of Ghana Department of Computer Science.png" alt="University of Ghana" class="affiliation-logo">
+                            <div class="affiliation-text">
+                                <h4>University of Ghana</h4>
+                                <p>Department of Computer Science</p>
+                            </div>
+                        </div>
+                        <div class="affiliation-item">
+                            <img src="Data Intelligence and Swarm Analytics Laboratory.png" alt="DISA Lab" class="affiliation-logo">
+                            <div class="affiliation-text">
+                                <h4>DISA Laboratory</h4>
+                                <p>Research Member &amp; Assistant</p>
+                            </div>
+                        </div>
+                        <div class="affiliation-item">
+                            <img src="ACVSS.png" alt="ACVSS" class="affiliation-logo">
+                            <div class="affiliation-text">
+                                <h4>African Computer Vision Summer School</h4>
+                                <p>Local Organizer (Ghana Chapter)</p>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Services & Mentorship Section -->
+                    <h2 id="services" class="section-anchor">Services &amp; Leadership</h2>
+                    <ul class="services-list">
+                        <li><strong>Local Organizer:</strong> African Computer Vision Summer School (ACVSS Ghana Chapter).</li>
+                        <li><strong>Research Mentor:</strong> Mentoring undergraduate computer science students in machine learning applied to healthcare diagnostics, agriculture, and network security.</li>
+                        <li><strong>Founder:</strong> Cortex Consult, guiding innovative data science solutions and applied artificial intelligence initiatives.</li>
+                    </ul>
+
+                    <!-- Contact Section -->
+                    <h2 id="contact" class="section-anchor">Contact</h2>
+                    <div class="contact-box">
+                        <p>
+                            I welcome collaborative research inquiries, academic discussions, and PhD advisor interactions in Adaptive ML, Concept Drift, Swarm Intelligence, and Computer Vision.
+                        </p>
+                        <div class="contact-methods">
+                            <div class="contact-method-item">
+                                <strong>Personal Email</strong>
+                                <a href="mailto:albertankad@gmail.com">albertankad@gmail.com</a>
+                            </div>
+                            <div class="contact-method-item">
+                                <strong>Student Email</strong>
+                                <a href="mailto:aadodoo003@st.ug.edu.gh">aadodoo003@st.ug.edu.gh</a>
+                            </div>
+                            <div class="contact-method-item">
+                                <strong>Phone</strong>
+                                <a href="tel:+233548094935">+233 54 809 4935</a>
+                            </div>
+                            <div class="contact-method-item">
+                                <strong>Location</strong>
+                                <span>Accra, Ghana (UTC+0)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="page__meta"></footer>
             </div>
-            
-            <div id="updates" class="news-container">
-                <h3>News</h3>
-                <ul class="news-list">
-                    <li><span class="news-date">[Sep 2026]</span> Invited to give a research talk at the Google AICC as part of their monthly Student Research Tech Talk.</li>
-                    <li><span class="news-date">[Aug 2026]</span> Attended the Deep Learning Indaba at Lagos, Nigeria.</li>
-                    <li><span class="news-date">[Jul 2026]</span> Selected for the <a href="https://www.acvss.ai/" target="_blank">African Computer Vision Summer School</a> hosted at the Google AI Community Center.</li>
+        </article>
+    </div>
+
+    <!-- Lightbox Modal for Full Image Zoom -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image Preview">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image preview">&times;</button>
+        <img id="lightbox-img" src="" alt="Enlarged preview">
+    </div>
+
+    <!-- Page Footer (AcademicPages Format) -->
+    <div class="page__footer">
+        <footer>
+            <div class="page__footer-follow">
+                <ul class="social-icons">
+                    <li><strong>Follow:</strong></li>
+                    <li><a href="https://github.com/nanafork" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/albert-ankomah-dodoo/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+                    <li><a href="https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener"><i class="ai ai-google-scholar" aria-hidden="true"></i> Google Scholar</a></li>
+                    <li><a href="https://orcid.org/my-orcid?orcid=0009-0005-5912-2699" target="_blank" rel="noopener"><i class="ai ai-orcid" aria-hidden="true"></i> ORCiD</a></li>
                 </ul>
             </div>
-        </section>
-
-
-        <section id="publications" class="publications section fade-in">
-            <h2 class="section-title">Publications</h2>
-            
-            <div class="publication-year">
-                <h3>2025</h3>
-                <div class="publication-list">
-                    <div class="publication-item glass-card">
-                        <h4>SARS Detection in Chest CT-Scan Images Using Bootstrapped ViT-B16 Model</h4>
-                        <p class="pub-authors">Appati, K.J., Ziamah, B., Akrofi, H.A., & <strong>Dodoo, A.A.</strong></p>
-                        <p class="pub-venue">Springer, Iran Journal of Computer Science (2025)</p>
-                        <a href="https://doi.org/10.1007/s42044-025-00231-1" target="_blank" class="pub-link">Read Paper <span>&rarr;</span></a>
-                    </div>
-                </div>
+            <div class="page__footer-copyright">
+                &copy; <span id="year">2026</span> Albert Ankomah Dodoo. Powered by <a href="https://github.com/academicpages/academicpages.github.io" rel="nofollow" target="_blank">AcademicPages</a>.
             </div>
+        </footer>
+    </div>
 
-            <div class="publication-year">
-                <h3>2023</h3>
-                <div class="publication-list">
-                    <div class="publication-item glass-card">
-                        <h4>Resampled Correlation-Based Feature Descriptors: A Novel Approach to Enhancing Malware Detection Capabilities</h4>
-                        <p class="pub-authors"><strong>Dodoo, A.A.</strong>, Koranteng, M., Amissah, D.K., & Appati, K.J.</p>
-                        <p class="pub-venue">Preprint at Research Square (2023)</p>
-                        <a href="https://doi.org/10.21203/rs.3.rs-4219089/v1" target="_blank" class="pub-link">Read Paper <span>&rarr;</span></a>
-                    </div>
-
-                    <div class="publication-item glass-card">
-                        <h4>Adapting Triple BigGAN for Image Detection Tasks: Challenges and Opportunities</h4>
-                        <p class="pub-authors">Quaicoo, R., Acheampong, R., Gyamenah, P., <strong>Dodoo, A.A.</strong>, Soli, M.A.T., & Appati, K.J.</p>
-                        <p class="pub-venue">Preprint at Research Square (2023)</p>
-                        <a href="https://doi.org/10.21203/rs.3.rs-4262097/v1" target="_blank" class="pub-link">Read Paper <span>&rarr;</span></a>
-                    </div>
-
-                    <div class="publication-item glass-card">
-                        <h4>Enhancing Unsupervised Signature Verification Through Advanced Feature Extraction Techniques</h4>
-                        <p class="pub-authors">Tetteh, L.M., Sarfo, O.Y., Amissah, D.K., <strong>Dodoo, A.A.</strong>, Soli, M.A.T., & Appati, K.J.</p>
-                        <p class="pub-venue">Preprint at Research Square (2023)</p>
-                        <a href="https://doi.org/10.21203/rs.3.rs-4249016/v1" target="_blank" class="pub-link">Read Paper <span>&rarr;</span></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="projects section fade-in">
-            <h2 class="section-title">Selected Projects</h2>
-            <div class="project-grid">
-                <!-- Project 1 -->
-                <div class="project-card glass-card" style="padding-top: 1rem;">
-                    <div class="project-img-gallery">
-                        <img src="Pipeline-of-drift-architecture.jpg" alt="Drift Architecture Pipeline">
-                        <img src="MastersRD-MAHAKIL.jpg" alt="MAHAKIL Architecture">
-                        <img src="MastersRD-Memory-Based-Cuckoo-Search-Optimization.jpg" alt="Memory-Based Cuckoo Search Optimization">
-                    </div>
-                    <div class="project-info">
-                        <span class="skill-tag" style="margin-bottom: 1.5rem; display: inline-block;">LSTM & Swarm Intelligence</span>
-                        <h3>Adaptive Drift-Aware CCF Detection Framework</h3>
-                        <p>Developed a robust Credit Card Fraud (CCF) detection framework utilizing an online LSTM architecture augmented with drift-detection mechanisms. Leveraged Memory-Based Cuckoo Search (MCS) for optimized feature selection.</p>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="project-card glass-card" style="padding-top: 1rem;">
-                    <div class="project-img-gallery">
-                        <img src="ViT Architecture.png" alt="Vision Transformer Architecture">
-                        <img src="pipeline_sars.png" alt="SARS Pipeline">
-                        <img src="covid ct.png" alt="COVID CT Scan">
-                    </div>
-                    <div class="project-info">
-                        <span class="skill-tag" style="margin-bottom: 1.5rem; display: inline-block;">Vision Transformers & Healthcare</span>
-                        <h3>ViT COVID-19 Detection Application</h3>
-                        <p>Mentored and collaborated with undergraduate students on cutting-edge research leveraging Vision Transformers (ViT) on chest CT scans for the rapid and robust detection of COVID-19 anomalies.</p>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="project-card glass-card" style="padding-top: 1rem;">
-                    <div class="project-img-gallery">
-                        <img src="feature_selection.png" alt="Feature Selection Methodology">
-                        <img src="methodology_correlation.png" alt="Methodology Correlation">
-                    </div>
-                    <div class="project-info">
-                        <span class="skill-tag" style="margin-bottom: 1.5rem; display: inline-block;">Deep Learning & Cybersecurity</span>
-                        <h3>Malware Detection via LSTM Models</h3>
-                        <p>Developed an LSTM-based deep learning model applied to resampled correlation-based feature descriptors, achieving an outstanding 98% accuracy in identifying and classifying advanced mobile malware.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="affiliations" class="affiliations section fade-in">
-            <h2 class="section-title">Communities & Affiliations</h2>
-            <div class="affiliations-grid">
-                <div class="affiliation-card glass-card">
-                    <img src="University of Ghana Department of Computer Science.png" alt="University of Ghana" class="affiliation-logo">
-                    <h3>University of Ghana</h3>
-                    <p>Department of Computer Science</p>
-                </div>
-                <div class="affiliation-card glass-card">
-                    <img src="Data Intelligence and Swarm Analytics Laboratory.png" alt="Data Intelligence and Swarm Analytics Laboratory" class="affiliation-logo">
-                    <h3>Data Intelligence & Swarm Analytics Lab</h3>
-                    <p>Research Member</p>
-                </div>
-                <div class="affiliation-card glass-card">
-                    <img src="ACVSS.png" alt="African Computer Vision Summer School" class="affiliation-logo">
-                    <h3>African Computer Vision Summer School</h3>
-                    <p>Local Organizer (Ghana)</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="gallery" class="section fade-in">
-            <h2 class="section-title">Gallery</h2>
-            <p class="gallery-subtitle">Research talks, community engagement, and academic discussions</p>
-
-            <div class="carousel-wrapper">
-                <button class="carousel-btn prev-btn" id="carousel-prev" aria-label="Previous">&#8249;</button>
-
-                <div class="carousel-track-container">
-                    <div class="carousel-track" id="carousel-track">
-                        <div class="carousel-slide">
-                            <img src="AICC Research Talk 1.jpeg" alt="Research Talk at Google AICC" loading="lazy">
-                            <div class="carousel-caption">Research Talk at Google AICC — Student Research Tech Talk, Sep 2026</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="AICC Research Talk 2.jpeg" alt="Research Talk at Google AICC" loading="lazy">
-                            <div class="carousel-caption">Research Talk at Google AICC — Student Research Tech Talk, Sep 2026</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="AICC Research Talk 3.jpeg" alt="Research Talk at Google AICC" loading="lazy">
-                            <div class="carousel-caption">Research Talk at Google AICC — Student Research Tech Talk, Sep 2026</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="Research Talk 4.jpeg" alt="Research Talk" loading="lazy">
-                            <div class="carousel-caption">Academic Research Engagement</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="Research Talk 5.jpeg" alt="Research Talk" loading="lazy">
-                            <div class="carousel-caption">Academic Research Engagement</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="Research Talk 6.jpeg" alt="Research Talk" loading="lazy">
-                            <div class="carousel-caption">Academic Research Engagement</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="Research Talk 7.jpeg" alt="Research Talk" loading="lazy">
-                            <div class="carousel-caption">Academic Research Engagement</div>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="carousel-btn next-btn" id="carousel-next" aria-label="Next">&#8250;</button>
-            </div>
-
-            <div class="carousel-dots" id="carousel-dots"></div>
-        </section>
-
-        <section id="contact" class="contact section fade-in">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-container glass-card">
-                <p>I am currently open to exploring PhD opportunities and collaborative research in Computer Vision, Multimodal Learning, TinyML, Drift Detection and Machine Learning applications in general.</p>
-                
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <strong>Personal Email</strong>
-                        <a href="mailto:albertankad@gmail.com">albertankad@gmail.com</a>
-                    </div>
-                    <div class="contact-method">
-                        <strong>Student Email</strong>
-                        <a href="mailto:aadodoo003@st.ug.edu.gh">aadodoo003@st.ug.edu.gh</a>
-                    </div>
-                    <div class="contact-method">
-                        <strong>Phone</strong>
-                        <a href="tel:+233548094935">+233 54 809 4935</a>
-                    </div>
-                </div>
-
-                <a href="mailto:albertankad@gmail.com" class="btn primary">Send me an email</a>
-                
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/albert-ankomah-dodoo/" target="_blank" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </a>
-                    <a href="https://orcid.org/my-orcid?orcid=0009-0005-5912-2699" target="_blank" class="social-icon" aria-label="ORCiD" title="ORCiD">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-1.847-1.238-3.722-3.806-3.722h-2.513z"/></svg>
-                    </a>
-                    <a href="https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao" target="_blank" class="social-icon" aria-label="Google Scholar" title="Google Scholar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; <span id="year"></span> All Rights Reserved | Albert Ankomah Dodoo</p>
-    </footer>
-
+    <!-- JavaScript Interactions -->
     <script src="script.js"></script>
 </body>
 

@@ -1,279 +1,176 @@
-// ===== THEME TOGGLE =====
-(function () {
-    const toggle   = document.getElementById('theme-toggle');
-    const icon     = document.getElementById('theme-icon');
-    const root     = document.documentElement;
-    const saved    = localStorage.getItem('theme') || 'dark';
+// ===== ACADEMICPAGES INTERACTIVITY SCRIPT =====
+// For Albert Ankomah Dodoo Portfolio
 
-    function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        icon.textContent = theme === 'light' ? '🌙' : '☀️';
-        localStorage.setItem('theme', theme);
-    }
-
-    applyTheme(saved);
-
-    toggle.addEventListener('click', () => {
-        const current = root.getAttribute('data-theme');
-        applyTheme(current === 'light' ? 'dark' : 'light');
-    });
-})();
-
-// Set current year in footer
-document.getElementById('year').textContent = new Date().getFullYear();
-
-
-// Intersection Observer for scroll animations (fade in elements as they enter viewport)
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('appear');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Select all elements with the class 'fade-in'
 document.addEventListener('DOMContentLoaded', () => {
-    const faders = document.querySelectorAll('.fade-in');
-    faders.forEach(fader => {
-        observer.observe(fader);
-    });
-
-    // Lightbox logic
-    const lightbox    = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn    = document.getElementById('lightbox-close');
-
-    document.querySelectorAll('.project-img-gallery img').forEach(img => {
-        img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        lightboxImg.src = '';
+    // 1. Set current year in footer
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
     }
 
-    closeBtn.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => {
-        if (e.target === lightbox) closeLightbox();
-    });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeLightbox();
-    });
+    // 2. Mobile Navigation Toggle
+    const navToggleBtn = document.getElementById('nav-toggle-btn');
+    const navMenu = document.getElementById('nav-menu');
 
-    // Mobile Menu Toggle logic
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const navLinks      = document.querySelector('.nav-links');
-    const navItems      = document.querySelectorAll('.nav-links li a');
-
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('toggle');
-        });
-    }
-
-    // Close mobile menu when a link is clicked
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('toggle');
-            }
-        });
-    });
-});
-
-// Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetElement = document.querySelector(this.getAttribute('href'));
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Neural Network Canvas Animation
-const canvas = document.getElementById('neural-net');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-
-    function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            // random velocity
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.radius = Math.random() * 1.5 + 0.5;
-        }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(59, 130, 246, 0.5)';
-            ctx.fill();
-        }
-    }
-
-    const calculateParticles = () => {
-        particles = [];
-        // More particles for wider screens, up to 100 max for performance
-        const numParticles = Math.min(Math.floor((width * height) / 10000), 80);
-        for (let i = 0; i < numParticles; i++) {
-            particles.push(new Particle());
-        }
-    };
-    calculateParticles();
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(calculateParticles, 200);
-    });
-
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 150) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(59, 130, 246, ${0.25 * (1 - distance / 150)})`;
-                    ctx.lineWidth = 1;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
+    if (navToggleBtn && navMenu) {
+        navToggleBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = navToggleBtn.querySelector('i');
+            if (icon) {
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
                 }
             }
+        });
+
+        // Close menu when clicking any nav item
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const icon = navToggleBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+    }
+
+    // 3. Mobile Sidebar Follow Toggle
+    const followToggleBtn = document.getElementById('follow-toggle-btn');
+    const authorUrls = document.getElementById('author-urls');
+
+    if (followToggleBtn && authorUrls) {
+        // Hide by default on smaller screens (< 900px)
+        if (window.innerWidth <= 900) {
+            authorUrls.classList.add('mobile-hidden');
         }
-        requestAnimationFrame(animate);
+
+        followToggleBtn.addEventListener('click', () => {
+            authorUrls.classList.toggle('mobile-hidden');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                authorUrls.classList.remove('mobile-hidden');
+            }
+        });
     }
-    animate();
-}
 
-// Profile Picture Cycling
-document.addEventListener('DOMContentLoaded', () => {
-    const profilePic = document.getElementById('profile-pic');
-    if (profilePic) {
-        const images = [
-            'Grad.jpeg',
-            'Grad1.jpeg'
-        ];
-        let currentIndex = 0;
+    // 4. Smooth Scrolling with fixed Masthead offset (75px)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId === '') return;
 
-        setInterval(() => {
-            // Fade out
-            profilePic.style.opacity = 0;
-            
-            // Wait for fade out to finish, then change source and fade back in
-            setTimeout(() => {
-                currentIndex = (currentIndex + 1) % images.length;
-                profilePic.src = images[currentIndex];
-                profilePic.style.opacity = 1;
-            }, 500);
-        }, 5000); // Change image every 5 seconds
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                const navHeight = 75;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 5. Lightbox for Enlargeable Images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    if (lightbox && lightboxImg && lightboxClose) {
+        document.querySelectorAll('.enlargeable-img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt || 'Enlarged image';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            lightboxImg.src = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
     }
-});
 
-// ===== GALLERY CAROUSEL =====
-(function () {
-    const track     = document.getElementById('carousel-track');
-    const prevBtn   = document.getElementById('carousel-prev');
-    const nextBtn   = document.getElementById('carousel-next');
+    // 6. Talks & Gallery Carousel
+    const track = document.getElementById('carousel-track');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
     const dotsContainer = document.getElementById('carousel-dots');
 
-    if (!track) return;
+    if (track && prevBtn && nextBtn && dotsContainer) {
+        const slides = Array.from(track.children);
+        const total = slides.length;
+        let current = 0;
+        let autoTimer = null;
 
-    const slides = Array.from(track.children);
-    const total  = slides.length;
-    let current  = 0;
-    let autoTimer;
+        // Create indicators
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            dot.setAttribute('aria-label', `Slide ${i + 1}`);
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        });
 
-    // Build dots
-    slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.classList.add('carousel-dot');
-        dot.setAttribute('aria-label', `Slide ${i + 1}`);
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goTo(i));
-        dotsContainer.appendChild(dot);
-    });
+        const dots = Array.from(dotsContainer.children);
 
-    const dots = Array.from(dotsContainer.children);
+        function goTo(index) {
+            current = (index + total) % total;
+            track.style.transform = `translateX(-${current * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        }
 
-    function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        function goNext() { goTo(current + 1); }
+        function goPrev() { goTo(current - 1); }
+
+        nextBtn.addEventListener('click', goNext);
+        prevBtn.addEventListener('click', goPrev);
+
+        // Pause autoplay on mouse hover
+        const carouselWrapper = track.closest('.talks-carousel');
+        if (carouselWrapper) {
+            function startAuto() {
+                stopAuto();
+                autoTimer = setInterval(goNext, 4500);
+            }
+            function stopAuto() {
+                if (autoTimer) {
+                    clearInterval(autoTimer);
+                    autoTimer = null;
+                }
+            }
+
+            carouselWrapper.addEventListener('mouseenter', stopAuto);
+            carouselWrapper.addEventListener('mouseleave', startAuto);
+            carouselWrapper.addEventListener('touchstart', stopAuto, { passive: true });
+            startAuto();
+        }
     }
-
-    function goNext() { goTo(current + 1); }
-    function goPrev() { goTo(current - 1); }
-
-    nextBtn.addEventListener('click', goNext);
-    prevBtn.addEventListener('click', goPrev);
-
-    // Keyboard navigation
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight') goNext();
-        if (e.key === 'ArrowLeft')  goPrev();
-    });
-
-    // Auto-advance every 4 seconds
-    function startAuto() {
-        autoTimer = setInterval(goNext, 4000);
-    }
-    function stopAuto() {
-        clearInterval(autoTimer);
-    }
-
-    track.closest('.carousel-wrapper').addEventListener('mouseenter', stopAuto);
-    track.closest('.carousel-wrapper').addEventListener('mouseleave', startAuto);
-
-    startAuto();
-})();
+});
