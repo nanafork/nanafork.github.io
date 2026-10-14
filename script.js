@@ -62,6 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeNav();
             }
         });
+
+        // Also close nav when scrolling on mobile (better UX)
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                closeNav();
+            }
+        }, { passive: true });
     }
 
     // 3. Smooth Scrolling with Dynamic Fixed Header Clearance

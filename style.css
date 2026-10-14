@@ -49,12 +49,16 @@ body {
     -webkit-text-size-adjust: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    word-break: break-word;
 }
 
-/* Global Anti-Clipping Rule for all text elements */
-h1, h2, h3, h4, h5, h6, p, li, a, span, div {
+/* Global Anti-Clipping Rule — applies to ALL text elements */
+h1, h2, h3, h4, h5, h6, p, li, a, span, div, strong, em, i, label, figcaption {
     overflow-wrap: break-word;
     word-wrap: break-word;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 
 /* ---------- Typography & Base Elements ---------- */
@@ -266,6 +270,7 @@ img {
 .author__content {
     margin-bottom: 1rem;
     width: 100%;
+    min-width: 0;
 }
 
 .author__name {
@@ -342,6 +347,7 @@ img {
     color: var(--text-color);
     display: flex;
     align-items: center;
+    min-width: 0;
 }
 
 .author__urls li a {
@@ -350,6 +356,7 @@ img {
     align-items: center;
     text-decoration: none;
     transition: color 0.15s ease-in-out;
+    min-width: 0;
 }
 
 .author__urls li a:hover {
@@ -836,7 +843,7 @@ img {
 
 .contact-methods {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.25rem;
     margin-top: 1rem;
     padding-top: 1rem;
@@ -856,6 +863,10 @@ img {
     letter-spacing: 0.5px;
     color: #6a737d;
     margin-bottom: 0.25rem;
+}
+
+.contact-method-item a {
+    word-break: break-all;
 }
 
 /* ---------- Page Footer (AcademicPages Format) ---------- */
@@ -975,7 +986,7 @@ img {
    MOBILE & TABLET RESPONSIVE SYSTEM (ZERO TEXT CLIPPING)
    ========================================================================== */
 
-/* Up to 900px (Tablets, iPads, Mobile in Landscape & Portrait) */
+/* ---------- Tablets & Small Laptops (up to 900px) ---------- */
 @media (max-width: 900px) {
     #main {
         flex-direction: column;
@@ -1039,7 +1050,7 @@ img {
         display: inline-flex;
     }
 
-    .author__urls li a, 
+    .author__urls li a,
     .author__urls li span {
         display: inline-flex;
         align-items: center;
@@ -1065,7 +1076,7 @@ img {
         display: none !important;
     }
 
-    /* Single Column Stacking for Publications at <= 900px */
+    /* Single Column Stacking for Publications */
     .publication {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -1086,7 +1097,7 @@ img {
         box-shadow: var(--shadow-sm);
     }
 
-    /* Single Column Stacking for Projects at <= 900px */
+    /* Single Column Stacking for Projects */
     .project-card {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -1106,23 +1117,24 @@ img {
     }
 }
 
-/* Standard Mobile Devices (< 768px) */
+/* ---------- Standard Mobile Devices (< 768px) ---------- */
 @media (max-width: 768px) {
     .masthead {
-        height: 64px;
+        height: 60px;
     }
 
     .masthead__inner-wrap {
-        padding: 0 1rem;
+        padding: 0 0.75rem;
     }
 
+    /* KEY FIX: Allow masthead title to wrap instead of clipping */
     .masthead-title {
-        font-size: clamp(0.95rem, 4.4vw, 1.15rem);
+        font-size: clamp(0.88rem, 4vw, 1.1rem);
         flex-shrink: 1;
         min-width: 0;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        overflow: visible;
+        text-overflow: clip;
     }
 
     .nav-toggle-btn {
@@ -1133,11 +1145,11 @@ img {
     .visible-links {
         display: none;
         position: fixed;
-        top: 64px;
+        top: 60px;
         left: 0;
         right: 0;
         width: 100%;
-        max-height: calc(100vh - 64px);
+        max-height: calc(100vh - 60px);
         overflow-y: auto;
         background: #ffffff;
         flex-direction: column;
@@ -1178,6 +1190,7 @@ img {
         font-weight: 500;
         color: var(--heading-color);
         border-bottom: 1px solid var(--border-subtle);
+        white-space: normal;
     }
 
     .visible-links li:last-child a {
@@ -1194,38 +1207,50 @@ img {
     }
 
     #main {
-        margin-top: 64px;
-        padding: 1.25rem 1rem 3rem;
+        margin-top: 60px;
+        padding: 1.25rem 0.85rem 3rem;
     }
 
     .page__title {
-        font-size: 1.85rem;
+        font-size: 1.75rem;
         margin-bottom: 1rem;
     }
 
     .section-anchor {
-        font-size: 1.35rem;
+        font-size: 1.3rem;
         margin-top: 2rem;
     }
 
+    /* Ensure paragraphs & text blocks don't clip */
+    .page__content p,
+    .page__content li,
+    .project-info p,
+    .publication__info p,
+    .contact-box p {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        max-width: 100%;
+    }
+
     .pub-links {
-        gap: 0.5rem;
+        gap: 0.45rem;
     }
 
     .pub-link-badge {
-        padding: 0.35rem 0.75rem;
-        font-size: 0.82rem;
-        min-height: 36px;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+        min-height: 34px;
     }
 
     /* Carousel Mobile Sizing */
     .talks-slide img {
-        max-height: 250px;
+        max-height: 240px;
     }
 
     .talks-caption {
-        padding: 0.65rem 0.85rem;
-        font-size: 0.82rem;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.45;
     }
 
     .carousel-nav-btn {
@@ -1261,43 +1286,159 @@ img {
     }
 
     .contact-box {
-        padding: 1.25rem 1rem;
+        padding: 1.15rem 0.85rem;
     }
 
     .page__footer footer {
-        padding: 1.75rem 1rem;
+        padding: 1.75rem 0.85rem;
     }
 
     .page__footer-follow .social-icons {
-        gap: 0.75rem;
+        gap: 0.65rem;
+        font-size: 0.82rem;
+    }
+
+    /* News list mobile */
+    .news-list {
+        padding-left: 1rem;
+    }
+
+    .news-list li {
+        font-size: 0.9rem;
+        line-height: 1.65;
     }
 }
 
-/* Small Phones (< 420px) */
+/* ---------- Small Phones (< 420px) ---------- */
 @media (max-width: 420px) {
+    .masthead__inner-wrap {
+        padding: 0 0.5rem;
+    }
+
     .masthead-title {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+
+    #main {
+        padding: 1rem 0.65rem 2.5rem;
     }
 
     .author__avatar img {
-        width: 115px;
-        height: 115px;
+        width: 110px;
+        height: 110px;
+        max-width: 110px;
+    }
+
+    .author__name {
+        font-size: 1.25rem;
     }
 
     .page__title {
-        font-size: 1.65rem;
+        font-size: 1.5rem;
     }
 
     .section-anchor {
-        font-size: 1.22rem;
+        font-size: 1.15rem;
+    }
+
+    h3 {
+        font-size: 1.05rem;
+    }
+
+    .publication__title,
+    .project-title {
+        font-size: 0.98rem;
+    }
+
+    .publication-category {
+        font-size: 1rem;
     }
 
     .talks-slide img {
-        max-height: 210px;
+        max-height: 200px;
+    }
+
+    .talks-caption {
+        padding: 0.5rem 0.65rem;
+        font-size: 0.76rem;
     }
 
     .pub-link-badge {
         width: 100%;
         justify-content: center;
+        font-size: 0.78rem;
+    }
+
+    .project-gallery img {
+        height: 90px;
+    }
+
+    /* Pill badges on very small screens */
+    .author__urls li a,
+    .author__urls li span {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+    }
+
+    .affiliation-item {
+        padding: 0.85rem;
+        gap: 0.75rem;
+    }
+
+    .affiliation-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .affiliation-text h4 {
+        font-size: 0.88rem;
+    }
+
+    .affiliation-text p {
+        font-size: 0.78rem;
+    }
+
+    .contact-method-item {
+        font-size: 0.88rem;
+    }
+
+    .page__footer footer {
+        padding: 1.5rem 0.65rem;
+    }
+
+    .page__footer-follow .social-icons {
+        gap: 0.5rem;
+        font-size: 0.78rem;
+    }
+}
+
+/* ---------- Very Small Phones (< 340px) ---------- */
+@media (max-width: 340px) {
+    .masthead-title {
+        font-size: 0.82rem;
+    }
+
+    .author__avatar img {
+        width: 95px;
+        height: 95px;
+        max-width: 95px;
+    }
+
+    .page__title {
+        font-size: 1.35rem;
+    }
+
+    .section-anchor {
+        font-size: 1.05rem;
+    }
+
+    .phd-badge {
+        font-size: 0.72rem;
+        padding: 0.3rem 0.55rem;
+    }
+
+    .publication__title,
+    .project-title {
+        font-size: 0.92rem;
     }
 }
