@@ -1,4 +1,4 @@
-// ===== ACADEMICPAGES INTERACTIVITY SCRIPT =====
+// ===== ACADEMICPAGES INTERACTIVITY & MOBILE SCRIPT =====
 // For Albert Ankomah Dodoo Portfolio
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,16 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
         yearEl.textContent = new Date().getFullYear();
     }
 
-    // 2. Mobile Navigation Toggle
+    // 2. Mobile Navigation Toggle & Outside Tap to Close
     const navToggleBtn = document.getElementById('nav-toggle-btn');
     const navMenu = document.getElementById('nav-menu');
+    const masthead = document.querySelector('.masthead');
 
     if (navToggleBtn && navMenu) {
-        navToggleBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        function toggleNav() {
+            const isActive = navMenu.classList.toggle('active');
             const icon = navToggleBtn.querySelector('i');
             if (icon) {
-                if (navMenu.classList.contains('active')) {
+                if (isActive) {
                     icon.classList.remove('fa-bars');
                     icon.classList.add('fa-times');
                 } else {
@@ -25,45 +26,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     icon.classList.add('fa-bars');
                 }
             }
+        }
+
+        function closeNav() {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = navToggleBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        }
+
+        navToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleNav();
         });
 
         // Close menu when clicking any nav item
         navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    const icon = navToggleBtn.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-            });
-        });
-    }
-
-    // 3. Mobile Sidebar Follow Toggle
-    const followToggleBtn = document.getElementById('follow-toggle-btn');
-    const authorUrls = document.getElementById('author-urls');
-
-    if (followToggleBtn && authorUrls) {
-        // Hide by default on smaller screens (< 900px)
-        if (window.innerWidth <= 900) {
-            authorUrls.classList.add('mobile-hidden');
-        }
-
-        followToggleBtn.addEventListener('click', () => {
-            authorUrls.classList.toggle('mobile-hidden');
+            link.addEventListener('click', closeNav);
         });
 
+        // Close menu when tapping outside of masthead
+        document.addEventListener('click', (e) => {
+            if (masthead && !masthead.contains(e.target)) {
+                closeNav();
+            }
+        });
+
+        // Close menu when window resizes to desktop width
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 900) {
-                authorUrls.classList.remove('mobile-hidden');
+            if (window.innerWidth > 768) {
+                closeNav();
             }
         });
     }
 
-    // 4. Smooth Scrolling with fixed Masthead offset (75px)
+    // 3. Smooth Scrolling with Dynamic Fixed Header Clearance
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -72,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                const navHeight = 75;
+                const headerHeight = masthead ? masthead.offsetHeight : 70;
                 const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                const offsetPosition = elementPosition + window.pageYOffset - (headerHeight + 15);
 
                 window.scrollTo({
                     top: offsetPosition,
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Lightbox for Enlargeable Images
+    // 4. Lightbox Modal for Enlargeable Images
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
@@ -106,17 +107,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', e => {
+        lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
-        document.addEventListener('keydown', e => {
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
             }
         });
     }
 
-    // 6. Talks & Gallery Carousel
+    // 5. Talks & Gallery Carousel with Touch / Swipe Support
     const track = document.getElementById('carousel-track');
     const prevBtn = document.getElementById('carousel-prev');
     const nextBtn = document.getElementById('carousel-next');
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let current = 0;
         let autoTimer = null;
 
-        // Create indicators
+        // Build pagination dots
         dotsContainer.innerHTML = '';
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
@@ -153,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.addEventListener('click', goNext);
         prevBtn.addEventListener('click', goPrev);
 
-        // Pause autoplay on mouse hover
+        // Autoplay logic (pause on touch or hover)
         const carouselWrapper = track.closest('.talks-carousel');
         if (carouselWrapper) {
             function startAuto() {
@@ -170,7 +171,36 @@ document.addEventListener('DOMContentLoaded', () => {
             carouselWrapper.addEventListener('mouseenter', stopAuto);
             carouselWrapper.addEventListener('mouseleave', startAuto);
             carouselWrapper.addEventListener('touchstart', stopAuto, { passive: true });
+            carouselWrapper.addEventListener('touchend', startAuto, { passive: true });
             startAuto();
         }
+
+        // Mobile Touch Gestures (Swipe Left / Right)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+
+            // Only trigger horizontal swipe if movement is predominantly horizontal
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+                if (deltaX > 0) {
+                    goNext(); // swiped left
+                } else {
+                    goPrev(); // swiped right
+                }
+            }
+        }, { passive: true });
     }
 });
