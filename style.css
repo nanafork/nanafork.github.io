@@ -30,16 +30,12 @@ html {
     scroll-behavior: smooth;
     font-size: 16px;
     width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
 }
 
 body {
     margin: 0;
     padding: 0;
     width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
     font-family: var(--font-sans);
     color: var(--text-color);
     background-color: var(--bg-color);
@@ -237,12 +233,33 @@ img {
 }
 
 /* ---------- Left Sticky Sidebar (.sidebar) ---------- */
-.sidebar {
+.sidebar,
+.sidebar.sticky {
     width: 250px;
     flex-shrink: 0;
+    position: -webkit-sticky;
     position: sticky;
     top: 90px;
+    align-self: flex-start;
+    max-height: calc(100vh - 105px);
+    overflow-y: auto;
     margin-bottom: 2rem;
+    z-index: 10;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
 }
 
 .sidebar-inner-wrap {
@@ -986,8 +1003,25 @@ img {
    MOBILE & TABLET RESPONSIVE SYSTEM (ZERO TEXT CLIPPING)
    ========================================================================== */
 
-/* ---------- Tablets & Small Laptops (up to 900px) ---------- */
-@media (max-width: 900px) {
+/* ---------- Medium / Split-Screen Screens (641px - 850px) ---------- */
+@media (min-width: 641px) and (max-width: 850px) {
+    #main {
+        gap: 1.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .sidebar,
+    .sidebar.sticky {
+        width: 215px;
+    }
+    .author__avatar img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+/* ---------- Mobile Phones Stacking (< 640px) ---------- */
+@media (max-width: 640px) {
     #main {
         flex-direction: column;
         gap: 2rem;
