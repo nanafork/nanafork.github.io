@@ -92,22 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Clearance for external navigation with hash (e.g. from projects.html to index.html#publications)
-    if (window.location.hash) {
-        setTimeout(() => {
-            const targetElement = document.querySelector(window.location.hash);
-            if (targetElement) {
-                const headerHeight = masthead ? masthead.offsetHeight : 70;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - (headerHeight + 15);
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }, 150);
-    }
-
     // 4. Lightbox Modal for Enlargeable Images
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
