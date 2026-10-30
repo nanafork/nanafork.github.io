@@ -692,7 +692,8 @@ img {
 }
 
 .project-gallery img {
-    height: 100px;
+    height: 130px;
+    background: #ffffff;
     width: auto;
     max-width: none;
     object-fit: cover;
@@ -1174,7 +1175,7 @@ img {
     }
 
     .project-gallery img {
-        height: 95px;
+        height: 115px;
     }
 }
 
@@ -1431,7 +1432,7 @@ img {
     }
 
     .project-gallery img {
-        height: 85px;
+        height: 95px;
     }
 
     /* Pill badges on very small screens */
