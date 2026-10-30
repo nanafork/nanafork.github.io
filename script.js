@@ -124,6 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 4b. Smooth Horizontal Scroll on Mouse Wheel for Galleries
+    document.querySelectorAll('.project-gallery').forEach(gallery => {
+        gallery.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0 && gallery.scrollWidth > gallery.clientWidth) {
+                e.preventDefault();
+                gallery.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+    });
+
     // 5. Talks & Gallery Carousel with Touch / Swipe Support
     const track = document.getElementById('carousel-track');
     const prevBtn = document.getElementById('carousel-prev');
