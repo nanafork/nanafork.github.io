@@ -426,12 +426,12 @@ img {
 
 /* Interactive Constellation Network Widget */
 .constellation-widget {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px dashed var(--border-subtle);
+    margin-top: 0.25rem;
+    padding-top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
     position: relative;
     user-select: none;
@@ -441,16 +441,20 @@ img {
 .constellation-widget__canvas-wrap {
     position: relative;
     width: 240px;
-    height: 215px;
+    max-width: 100%;
+    height: 205px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 
 #constellation-canvas {
     display: block;
     width: 240px;
-    height: 215px;
+    max-width: 100%;
+    height: 205px;
+    margin: 0 auto;
     cursor: grab;
     touch-action: none; /* Prevents scroll while dragging nodes on touch */
 }

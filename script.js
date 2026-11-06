@@ -307,23 +307,23 @@ function initConstellationGraph() {
 
     // High-DPI Canvas Scaling
     const width = 240;
-    const height = 215;
+    const height = 205;
     const dpr = Math.max(1, window.devicePixelRatio || 1);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     canvas.style.width = width + 'px';
     canvas.style.height = height + 'px';
 
-    // 5 Circular Nodes matching user uploaded network layout
+    // 5 Circular Nodes matching user uploaded network layout (horizontally and vertically centered)
     const nodes = [
         {
             id: 'in',
             label: 'LinkedIn Profile',
             url: 'https://www.linkedin.com/in/albert-ankomah-dodoo/',
-            homeX: 118,
-            homeY: 38,
-            x: 118,
-            y: 38,
+            homeX: 100,
+            homeY: 32,
+            x: 100,
+            y: 32,
             vx: 0,
             vy: 0,
             radius: 20,
@@ -335,10 +335,10 @@ function initConstellationGraph() {
             id: 'cv',
             label: 'Curriculum Vitae (PDF)',
             url: 'Curriculum Vitae_Albert Ankomah Dodoo.pdf',
-            homeX: 80,
-            homeY: 92,
-            x: 80,
-            y: 92,
+            homeX: 62,
+            homeY: 86,
+            x: 62,
+            y: 86,
             vx: 0,
             vy: 0,
             radius: 20,
@@ -350,10 +350,10 @@ function initConstellationGraph() {
             id: 'scholar',
             label: 'Google Scholar',
             url: 'https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao',
-            homeX: 196,
-            homeY: 126,
-            x: 196,
-            y: 126,
+            homeX: 178,
+            homeY: 120,
+            x: 178,
+            y: 120,
             vx: 0,
             vy: 0,
             radius: 20,
@@ -365,10 +365,10 @@ function initConstellationGraph() {
             id: 'github',
             label: 'GitHub Profile',
             url: 'https://github.com/nanafork',
-            homeX: 138,
-            homeY: 146,
-            x: 138,
-            y: 146,
+            homeX: 120,
+            homeY: 140,
+            x: 120,
+            y: 140,
             vx: 0,
             vy: 0,
             radius: 20,
@@ -380,10 +380,10 @@ function initConstellationGraph() {
             id: 'email',
             label: 'Email Albert (albertankad@gmail.com)',
             url: 'mailto:albertankad@gmail.com',
-            homeX: 86,
-            homeY: 180,
-            x: 86,
-            y: 180,
+            homeX: 68,
+            homeY: 174,
+            x: 68,
+            y: 174,
             vx: 0,
             vy: 0,
             radius: 20,
