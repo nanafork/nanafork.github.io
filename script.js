@@ -220,4 +220,72 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
     }
+
+    // 6. Interactive Contact Form & Copy Email
+    const contactForm = document.getElementById('contact-quick-form');
+    const gmailBtn = document.getElementById('btn-send-gmail');
+    const targetEmail = 'albertankad@gmail.com';
+
+    if (contactForm) {
+        function buildEmailContent() {
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const subject = document.getElementById('contact-subject').value.trim() || 'Inquiry from Public Profile';
+            const message = document.getElementById('contact-message').value.trim();
+
+            const body = `Hi Albert,\n\n${message}\n\n---\nFrom: ${name}\nEmail: ${email}`;
+            return { name, email, subject, body };
+        }
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const { subject, body } = buildEmailContent();
+            const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
+        });
+
+        if (gmailBtn) {
+            gmailBtn.addEventListener('click', () => {
+                const nameInput = document.getElementById('contact-name');
+                const messageInput = document.getElementById('contact-message');
+
+                if (!nameInput.checkValidity() || !messageInput.checkValidity()) {
+                    contactForm.reportValidity();
+                    return;
+                }
+
+                const { subject, body } = buildEmailContent();
+                const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${targetEmail}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+            });
+        }
+    }
+
+    // Copy Email to Clipboard with visual feedback
+    document.querySelectorAll('.copy-email-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const email = btn.getAttribute('data-email') || targetEmail;
+            try {
+                await navigator.clipboard.writeText(email);
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                const tempInput = document.createElement('input');
+                tempInput.value = email;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> <span>Copy</span>';
+                }, 2000);
+            }
+        });
+    });
 });
