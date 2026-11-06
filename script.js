@@ -288,4 +288,481 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 8. Interactive Draggable Constellation Network Graph
+    initConstellationGraph();
 });
+
+/**
+ * Interactive Spring-Physics Constellation Graph
+ * Renders draggable contact & social profile nodes connected by elastic springs.
+ */
+function initConstellationGraph() {
+    const canvas = document.getElementById('constellation-canvas');
+    const tooltip = document.getElementById('constellation-tooltip');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // High-DPI Canvas Scaling
+    const width = 240;
+    const height = 215;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    // 5 Circular Nodes matching user uploaded network layout
+    const nodes = [
+        {
+            id: 'in',
+            label: 'LinkedIn Profile',
+            url: 'https://www.linkedin.com/in/albert-ankomah-dodoo/',
+            homeX: 118,
+            homeY: 38,
+            x: 118,
+            y: 38,
+            vx: 0,
+            vy: 0,
+            radius: 20,
+            ringColor: '#4f5fc7',
+            isDragging: false,
+            isHovered: false
+        },
+        {
+            id: 'cv',
+            label: 'Curriculum Vitae (PDF)',
+            url: 'Curriculum Vitae_Albert Ankomah Dodoo.pdf',
+            homeX: 80,
+            homeY: 92,
+            x: 80,
+            y: 92,
+            vx: 0,
+            vy: 0,
+            radius: 20,
+            ringColor: '#9b3ba8',
+            isDragging: false,
+            isHovered: false
+        },
+        {
+            id: 'scholar',
+            label: 'Google Scholar',
+            url: 'https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao',
+            homeX: 196,
+            homeY: 126,
+            x: 196,
+            y: 126,
+            vx: 0,
+            vy: 0,
+            radius: 20,
+            ringColor: '#279f53',
+            isDragging: false,
+            isHovered: false
+        },
+        {
+            id: 'github',
+            label: 'GitHub Profile',
+            url: 'https://github.com/nanafork',
+            homeX: 138,
+            homeY: 146,
+            x: 138,
+            y: 146,
+            vx: 0,
+            vy: 0,
+            radius: 20,
+            ringColor: '#702728',
+            isDragging: false,
+            isHovered: false
+        },
+        {
+            id: 'email',
+            label: 'Email Albert (albertankad@gmail.com)',
+            url: 'mailto:albertankad@gmail.com',
+            homeX: 86,
+            homeY: 180,
+            x: 86,
+            y: 180,
+            vx: 0,
+            vy: 0,
+            radius: 20,
+            ringColor: '#8c992f',
+            isDragging: false,
+            isHovered: false
+        }
+    ];
+
+    // 7 Spring Edges matching reference network topology:
+    // (in-cv, in-scholar, in-github, cv-github, cv-email, scholar-github, github-email)
+    const edgeDefs = [
+        { s: 0, t: 1 },
+        { s: 0, t: 2 },
+        { s: 0, t: 3 },
+        { s: 1, t: 3 },
+        { s: 1, t: 4 },
+        { s: 2, t: 3 },
+        { s: 3, t: 4 }
+    ];
+
+    const edges = edgeDefs.map(e => {
+        const u = nodes[e.s];
+        const v = nodes[e.t];
+        return {
+            source: u,
+            target: v,
+            restLength: Math.hypot(v.homeX - u.homeX, v.homeY - u.homeY)
+        };
+    });
+
+    // Vector Octocat path for GitHub node
+    const octocatPath = new Path2D(
+        'M0 -11 C-6.1 -11 -11 -6.1 -11 0 C-11 4.9 -7.8 9 -3.4 10.5 C-2.8 10.6 -2.6 10.2 -2.6 9.9 ' +
+        'C-2.6 9.6 -2.6 8.7 -2.6 7.6 C-5.7 8.3 -6.3 6.8 -6.3 6.8 C-6.8 5.5 -7.6 5.1 -7.6 5.1 ' +
+        'C-8.6 4.4 -7.5 4.4 -7.5 4.4 C-6.4 4.5 -5.8 5.6 -5.8 5.6 C-4.8 7.3 -3.2 6.8 -2.6 6.5 ' +
+        'C-2.5 5.8 -2.2 5.3 -1.9 5 C-4.3 4.7 -6.9 3.5 -6.9 -0.6 C-6.9 -1.8 -6.5 -2.7 -5.8 -3.5 ' +
+        'C-5.9 -3.8 -6.3 -5.1 -5.7 -6.8 C-5.7 -6.8 -4.8 -7.1 -2.7 -5.7 C-1.8 -6 -0.9 -6.1 0 -6.1 ' +
+        'C0.9 -6.1 1.8 -6 2.7 -5.7 C4.8 -7.1 5.7 -6.8 5.7 -6.8 C6.3 -5.1 5.9 -3.8 5.8 -3.5 ' +
+        'C6.5 -2.7 6.9 -1.8 6.9 -0.6 C6.9 3.5 4.3 4.7 1.9 5 C2.3 5.3 2.6 6 2.6 6.9 ' +
+        'C2.6 8.2 2.6 9.3 2.6 9.9 C2.6 10.2 2.8 10.6 3.4 10.5 C7.8 9 11 4.9 11 0 C11 -6.1 6.1 -11 0 -11 Z'
+    );
+
+    // Physics Simulation Update Step
+    function updatePhysics() {
+        // 1. Hooke's Law Spring forces between connected nodes
+        for (let i = 0; i < edges.length; i++) {
+            const edge = edges[i];
+            const u = edge.source;
+            const v = edge.target;
+            const dx = v.x - u.x;
+            const dy = v.y - u.y;
+            const dist = Math.hypot(dx, dy) || 0.001;
+            const displacement = dist - edge.restLength;
+            const force = displacement * 0.038;
+            const fx = (dx / dist) * force;
+            const fy = (dy / dist) * force;
+
+            if (!u.isDragging) {
+                u.vx += fx;
+                u.vy += fy;
+            }
+            if (!v.isDragging) {
+                v.vx -= fx;
+                v.vy -= fy;
+            }
+        }
+
+        // 2. Tether each node elastically to its home position, handle collisions and damping
+        for (let i = 0; i < nodes.length; i++) {
+            const node = nodes[i];
+            if (node.isDragging) {
+                node.vx = 0;
+                node.vy = 0;
+                continue;
+            }
+
+            // Elastic pull toward home anchor
+            const hdx = node.homeX - node.x;
+            const hdy = node.homeY - node.y;
+            node.vx += hdx * 0.042;
+            node.vy += hdy * 0.042;
+
+            // Collision avoidance between nodes
+            for (let j = i + 1; j < nodes.length; j++) {
+                const other = nodes[j];
+                const cdx = other.x - node.x;
+                const cdy = other.y - node.y;
+                const cdist = Math.hypot(cdx, cdy) || 0.001;
+                const minDist = node.radius + other.radius + 3;
+                if (cdist < minDist) {
+                    const overlap = (minDist - cdist) * 0.5;
+                    const nx = (cdx / cdist) * overlap;
+                    const ny = (cdy / cdist) * overlap;
+                    if (!node.isDragging) {
+                        node.x -= nx;
+                        node.y -= ny;
+                    }
+                    if (!other.isDragging) {
+                        other.x += nx;
+                        other.y += ny;
+                    }
+                }
+            }
+
+            // Damping decay
+            node.vx *= 0.82;
+            node.vy *= 0.82;
+
+            // Integrate position
+            node.x += node.vx;
+            node.y += node.vy;
+
+            // Boundary clamping within canvas
+            const pad = node.radius + 3;
+            if (node.x < pad) { node.x = pad; node.vx = 0; }
+            if (node.x > width - pad) { node.x = width - pad; node.vx = 0; }
+            if (node.y < pad) { node.y = pad; node.vy = 0; }
+            if (node.y > height - pad) { node.y = height - pad; node.vy = 0; }
+        }
+    }
+
+    // Render Function
+    function draw() {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw spring connection lines
+        for (let i = 0; i < edges.length; i++) {
+            const edge = edges[i];
+            const u = edge.source;
+            const v = edge.target;
+            const isHot = u.isDragging || v.isDragging || u.isHovered || v.isHovered;
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(u.x, u.y);
+            ctx.lineTo(v.x, v.y);
+            ctx.strokeStyle = isHot ? '#94a3b8' : '#cbd5e1';
+            ctx.lineWidth = isHot ? 2.2 : 1.8;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // Draw circular nodes
+        for (let i = 0; i < nodes.length; i++) {
+            const node = nodes[i];
+            ctx.save();
+
+            // Drop shadow for interactive feedback
+            if (node.isDragging || node.isHovered) {
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetY = 3;
+            }
+
+            // Clean white inner fill
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            // Colored outer ring
+            ctx.strokeStyle = node.ringColor;
+            ctx.lineWidth = node.isDragging ? 4.5 : 3.8;
+            ctx.stroke();
+
+            // Reset shadow before drawing inner icon/emblem
+            ctx.shadowColor = 'transparent';
+
+            // Draw crisp vector icon inside
+            drawNodeIcon(node);
+
+            ctx.restore();
+        }
+    }
+
+    // Draw Vector Icon / Typography inside Node
+    function drawNodeIcon(node) {
+        const cx = node.x;
+        const cy = node.y;
+
+        if (node.id === 'in') {
+            // LinkedIn "in" bold typography
+            ctx.fillStyle = node.ringColor;
+            ctx.font = 'bold 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('in', cx, cy + 0.5);
+        } else if (node.id === 'cv') {
+            // Curriculum Vitae "cv" bold typography
+            ctx.fillStyle = node.ringColor;
+            ctx.font = 'bold 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('cv', cx, cy + 0.5);
+        } else if (node.id === 'scholar') {
+            // Google Scholar multi-color geometric academic cap
+            // Yellow lower circle / neck
+            ctx.beginPath();
+            ctx.arc(cx, cy + 4.5, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#fbbc04';
+            ctx.fill();
+
+            // Top diamond: Left Blue
+            ctx.beginPath();
+            ctx.moveTo(cx - 9, cy - 2);
+            ctx.lineTo(cx, cy - 8);
+            ctx.lineTo(cx, cy - 1);
+            ctx.closePath();
+            ctx.fillStyle = '#2b76dc';
+            ctx.fill();
+
+            // Top diamond: Right Red
+            ctx.beginPath();
+            ctx.moveTo(cx + 9, cy - 2);
+            ctx.lineTo(cx, cy - 8);
+            ctx.lineTo(cx, cy - 1);
+            ctx.closePath();
+            ctx.fillStyle = '#df4432';
+            ctx.fill();
+
+            // Bottom diamond neck: Green
+            ctx.beginPath();
+            ctx.moveTo(cx - 6, cy - 1);
+            ctx.lineTo(cx + 6, cy - 1);
+            ctx.lineTo(cx, cy + 3.2);
+            ctx.closePath();
+            ctx.fillStyle = '#239e53';
+            ctx.fill();
+        } else if (node.id === 'github') {
+            // GitHub Octocat silhouette
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.scale(0.85, 0.85);
+            ctx.fillStyle = node.ringColor;
+            ctx.fill(octocatPath);
+            ctx.restore();
+        } else if (node.id === 'email') {
+            // Email envelope outline with V flap
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = node.ringColor;
+            ctx.lineWidth = 1.7;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            const w = 9;
+            const h = 6.2;
+            ctx.strokeRect(-w, -h, w * 2, h * 2);
+            ctx.beginPath();
+            ctx.moveTo(-w, -h);
+            ctx.lineTo(0, 0.8);
+            ctx.lineTo(w, -h);
+            ctx.stroke();
+            ctx.restore();
+        }
+    }
+
+    // Pointer Interaction & Drag Physics
+    let activeNode = null;
+    let pointerDownPos = { x: 0, y: 0 };
+    let hasDragged = false;
+
+    function getCanvasPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = width / rect.width;
+        const scaleY = height / rect.height;
+        return {
+            x: (e.clientX - rect.left) * scaleX,
+            y: (e.clientY - rect.top) * scaleY
+        };
+    }
+
+    function findNodeAt(x, y) {
+        for (let i = nodes.length - 1; i >= 0; i--) {
+            const n = nodes[i];
+            if (Math.hypot(n.x - x, n.y - y) <= n.radius + 6) {
+                return n;
+            }
+        }
+        return null;
+    }
+
+    function showTooltip(node) {
+        if (!tooltip) return;
+        if (node) {
+            tooltip.textContent = node.label;
+            tooltip.style.left = node.x + 'px';
+            tooltip.style.top = (node.y - node.radius - 8) + 'px';
+            tooltip.classList.add('is-visible');
+        } else {
+            tooltip.classList.remove('is-visible');
+        }
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+        const pos = getCanvasPos(e);
+        const hit = findNodeAt(pos.x, pos.y);
+        if (hit) {
+            activeNode = hit;
+            activeNode.isDragging = true;
+            pointerDownPos = { x: pos.x, y: pos.y };
+            hasDragged = false;
+            canvas.classList.add('is-dragging');
+            canvas.setPointerCapture(e.pointerId);
+            showTooltip(activeNode);
+        }
+    });
+
+    canvas.addEventListener('pointermove', (e) => {
+        const pos = getCanvasPos(e);
+        if (activeNode) {
+            const dist = Math.hypot(pos.x - pointerDownPos.x, pos.y - pointerDownPos.y);
+            if (dist > 5) {
+                hasDragged = true;
+            }
+            activeNode.x = Math.max(activeNode.radius, Math.min(width - activeNode.radius, pos.x));
+            activeNode.y = Math.max(activeNode.radius, Math.min(height - activeNode.radius, pos.y));
+            activeNode.vx = 0;
+            activeNode.vy = 0;
+            showTooltip(activeNode);
+        } else {
+            const hovered = findNodeAt(pos.x, pos.y);
+            for (let i = 0; i < nodes.length; i++) {
+                nodes[i].isHovered = (nodes[i] === hovered);
+            }
+            if (hovered) {
+                canvas.style.cursor = 'grab';
+                showTooltip(hovered);
+            } else {
+                canvas.style.cursor = 'default';
+                showTooltip(null);
+            }
+        }
+    });
+
+    function handlePointerRelease(e) {
+        if (activeNode) {
+            const clickedNode = activeNode;
+            if (!hasDragged) {
+                // Node was clicked or tapped: trigger relevant action
+                if (clickedNode.url.startsWith('mailto:')) {
+                    window.location.href = clickedNode.url;
+                } else {
+                    window.open(clickedNode.url, '_blank', 'noopener,noreferrer');
+                }
+            }
+
+            clickedNode.isDragging = false;
+            try {
+                canvas.releasePointerCapture(e.pointerId);
+            } catch (_) {}
+            activeNode = null;
+            canvas.classList.remove('is-dragging');
+            showTooltip(null);
+        }
+    }
+
+    canvas.addEventListener('pointerup', handlePointerRelease);
+    canvas.addEventListener('pointercancel', handlePointerRelease);
+    canvas.addEventListener('pointerleave', () => {
+        if (!activeNode) {
+            for (let i = 0; i < nodes.length; i++) {
+                nodes[i].isHovered = false;
+            }
+            showTooltip(null);
+        }
+    });
+
+    // Animation Loop
+    function animationLoop() {
+        updatePhysics();
+        draw();
+        if (activeNode && tooltip) {
+            tooltip.style.left = activeNode.x + 'px';
+            tooltip.style.top = (activeNode.y - activeNode.radius - 8) + 'px';
+        }
+        requestAnimationFrame(animationLoop);
+    }
+
+    requestAnimationFrame(animationLoop);
+}

@@ -390,6 +390,127 @@ img {
     font-size: 0.95rem;
 }
 
+/* Sidebar Meta Tags (Location & Institution) */
+.author__meta-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.75rem 0 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.author__meta-tags .meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+    line-height: 1.35;
+}
+
+.author__meta-tags a.meta-tag:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.author__meta-tags .meta-tag i {
+    width: 1.15rem;
+    text-align: center;
+    color: #6a737d;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+/* Interactive Constellation Network Widget */
+.constellation-widget {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.constellation-widget__canvas-wrap {
+    position: relative;
+    width: 240px;
+    height: 215px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#constellation-canvas {
+    display: block;
+    width: 240px;
+    height: 215px;
+    cursor: grab;
+    touch-action: none; /* Prevents scroll while dragging nodes on touch */
+}
+
+#constellation-canvas.is-dragging {
+    cursor: grabbing;
+}
+
+.constellation-tooltip {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -100%) scale(0.92);
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+    background: rgba(23, 27, 34, 0.94);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    padding: 4px 9px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+    white-space: nowrap;
+    z-index: 20;
+}
+
+.constellation-tooltip.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+}
+
+.constellation-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: rgba(23, 27, 34, 0.94) transparent transparent transparent;
+}
+
+.constellation-widget__hint {
+    margin-top: 0.25rem;
+    font-size: 0.72rem;
+    color: var(--text-muted, #6a737d);
+    text-align: center;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    opacity: 0.85;
+}
+
+.constellation-widget__hint i {
+    font-size: 0.7rem;
+    color: var(--primary-color);
+}
+
 /* ---------- Main Page Reading Column (.page) ---------- */
 .page {
     flex: 1;
@@ -1362,6 +1483,13 @@ a.contact-card__value:hover {
 
     .phd-badge {
         margin: 0.5rem auto 1rem;
+    }
+
+    .author__meta-tags {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.85rem;
     }
 
     /* Transform contact & social profiles into wrapping pill badges */

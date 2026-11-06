@@ -25,7 +25,7 @@
     <meta http-equiv="Expires" content="0">
 
     <!-- Main Stylesheet (Versioned to break browser caching) -->
-    <link rel="stylesheet" href="style.css?v=3.6">
+    <link rel="stylesheet" href="style.css?v=3.7">
 </head>
 
 <body>
@@ -73,49 +73,31 @@
                         <span>Seeking Fall '27 PhD Roles</span>
                     </div>
                 </div>
+                <div class="author__meta-tags">
+                    <span class="meta-tag"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Accra, Ghana</span>
+                    <a href="https://dcs.ug.edu.gh/" target="_blank" rel="noopener" class="meta-tag"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> Univ. of Ghana</a>
+                </div>
 
-                <div class="author__urls-wrapper">
-                    <button class="btn-follow" id="follow-toggle-btn">
-                        <i class="fas fa-address-card icon-pad-right"></i> Contact & Profiles
-                    </button>
-                    <ul class="author__urls social-icons" id="author-urls">
-                        <!-- Location & Institution -->
-                        <li>
-                            <i class="fa-solid fa-location-dot icon-pad-right" aria-hidden="true"></i>
-                            <span>Accra, Ghana</span>
-                        </li>
-                        <li>
-                            <a href="https://dcs.ug.edu.gh/" target="_blank" rel="noopener">
-                                <i class="fa-solid fa-building-columns icon-pad-right" aria-hidden="true"></i>
-                                <span>University of Ghana</span>
-                            </a>
-                        </li>
+                <!-- Interactive Constellation Network Graph -->
+                <div class="constellation-widget" id="constellation-widget">
+                    <div class="constellation-widget__canvas-wrap">
+                        <canvas id="constellation-canvas" width="240" height="215" role="application" aria-label="Interactive contact and social network. Drag nodes to interact, click to open profile."></canvas>
+                        <div id="constellation-tooltip" class="constellation-tooltip" aria-hidden="true"></div>
+                    </div>
+                    <div class="constellation-widget__hint">
+                        <i class="fas fa-hand-pointer"></i> Drag icons &bull; Click to open
+                    </div>
+                </div>
 
-                        <!-- Academic & Social Profiles -->
-                        <li>
-                            <a href="https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
-                                <i class="ai ai-google-scholar icon-pad-right" aria-hidden="true"></i>
-                                <span>Google Scholar</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://orcid.org/my-orcid?orcid=0009-0005-5912-2699" target="_blank" rel="noopener">
-                                <i class="ai ai-orcid icon-pad-right" aria-hidden="true"></i>
-                                <span>ORCiD</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/albert-ankomah-dodoo/" target="_blank" rel="noopener">
-                                <i class="fab fa-fw fa-linkedin icon-pad-right" aria-hidden="true"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/nanafork" target="_blank" rel="noopener">
-                                <i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>
-                                <span>GitHub</span>
-                            </a>
-                        </li>
+                <!-- Accessible Links for SEO & Screen Readers -->
+                <div class="sr-only">
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/albert-ankomah-dodoo/">LinkedIn</a></li>
+                        <li><a href="Curriculum Vitae_Albert Ankomah Dodoo.pdf">Curriculum Vitae</a></li>
+                        <li><a href="https://scholar.google.com/citations?user=8UJVMjUAAAAJ&hl=en&oi=ao">Google Scholar</a></li>
+                        <li><a href="https://github.com/nanafork">GitHub</a></li>
+                        <li><a href="mailto:albertankad@gmail.com">Email</a></li>
+                        <li><a href="https://orcid.org/my-orcid?orcid=0009-0005-5912-2699">ORCiD</a></li>
                     </ul>
                 </div>
             </div>
@@ -484,7 +466,7 @@
     </div>
 
     <!-- JavaScript Interactions (Versioned to break browser caching) -->
-    <script src="script.js?v=3.6"></script>
+    <script src="script.js?v=3.7"></script>
 </body>
 
 </html>
