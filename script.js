@@ -2,6 +2,36 @@
 // For Albert Ankomah Dodoo Portfolio
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Dark / Light Mode Switcher
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    function updateThemeToggleUI(theme) {
+        if (!themeToggleBtn) return;
+        const icon = themeToggleBtn.querySelector('i');
+        if (!icon) return;
+        if (theme === 'dark') {
+            icon.className = 'fas fa-sun';
+            themeToggleBtn.setAttribute('aria-label', 'Switch to light mode');
+            themeToggleBtn.setAttribute('title', 'Switch to light mode');
+        } else {
+            icon.className = 'fas fa-moon';
+            themeToggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+            themeToggleBtn.setAttribute('title', 'Switch to dark mode');
+        }
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    updateThemeToggleUI(currentTheme);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeToggleUI(newTheme);
+        });
+    }
+
     // 1. Set current year in footer
     const yearEl = document.getElementById('year');
     if (yearEl) {
@@ -512,6 +542,7 @@ function initConstellationGraph() {
         ctx.clearRect(0, 0, width, height);
 
         // Draw spring connection lines
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         for (let i = 0; i < edges.length; i++) {
             const edge = edges[i];
             const u = edge.source;
@@ -522,7 +553,7 @@ function initConstellationGraph() {
             ctx.beginPath();
             ctx.moveTo(u.x, u.y);
             ctx.lineTo(v.x, v.y);
-            ctx.strokeStyle = isHot ? '#94a3b8' : '#cbd5e1';
+            ctx.strokeStyle = isHot ? (isDark ? '#94a3b8' : '#64748b') : (isDark ? '#475569' : '#cbd5e1');
             ctx.lineWidth = isHot ? 2.2 : 1.8;
             ctx.stroke();
             ctx.restore();
@@ -535,15 +566,15 @@ function initConstellationGraph() {
 
             // Drop shadow for interactive feedback
             if (node.isDragging || node.isHovered) {
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowColor = isDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.2)';
                 ctx.shadowBlur = 10;
                 ctx.shadowOffsetY = 3;
             }
 
-            // Clean white inner fill
+            // Clean inner fill (adapts to light/dark background)
             ctx.beginPath();
             ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
+            ctx.fillStyle = isDark ? '#1e293b' : '#ffffff';
             ctx.fill();
 
             // Colored outer ring

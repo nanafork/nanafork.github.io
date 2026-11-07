@@ -25,7 +25,18 @@
     <meta http-equiv="Expires" content="0">
 
     <!-- Main Stylesheet (Versioned to break browser caching) -->
-    <link rel="stylesheet" href="style.css?v=4.2">
+    <link rel="stylesheet" href="style.css?v=4.3">
+<script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -35,13 +46,17 @@
             <div class="masthead__menu">
                 <nav id="site-nav" class="greedy-nav">
                     <a class="masthead-title" href="#">Albert Ankomah Dodoo</a>
-                    <button class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle navigation menu">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                    <div class="masthead__actions">
+                        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle dark/light mode" title="Toggle theme">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                        </button>
+                        <button class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle navigation menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
                     <ul class="visible-links" id="nav-menu">
                         <li><a href="#about">About</a></li>
                         <li><a href="#news">News</a></li>
-                        <li><a href="#research-vision">Research Vision</a></li>
                         <li><a href="#publications">Publications</a></li>
                         <li><a href="#talks">Talks</a></li>
                         <li><a href="#contact">Contact</a></li>
@@ -152,12 +167,6 @@
                             Selected for the <a href="https://www.acvss.ai/" target="_blank" rel="noopener">African Computer Vision Summer School (ACVSS)</a> hosted at the Google AI Community Center.
                         </li>
                     </ul>
-
-                    <!-- Research Vision Section -->
-                    <h2 id="research-vision" class="section-anchor">Research Vision</h2>
-                    <p>
-                        My long-term research goal is to advance <strong>adaptive, drift-resilient, and trustworthy artificial intelligence systems</strong> capable of continuous online learning in non-stationary streaming environments.
-                    </p>
 
                     <!-- Selected Publications Section -->
                     <h2 id="publications" class="section-anchor">Selected Publications</h2>
@@ -457,7 +466,7 @@
     </div>
 
     <!-- JavaScript Interactions (Versioned to break browser caching) -->
-    <script src="script.js?v=4.2"></script>
+    <script src="script.js?v=4.3"></script>
 </body>
 
 </html>

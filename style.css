@@ -10,16 +10,45 @@
     --primary-dark: #276274;
     --primary-light: #e8f4f8;
     --text-color: #494e52;
+    --text-muted: #64748b;
     --heading-color: #24292e;
     --border-color: #e6e6e6;
     --border-subtle: #f2f3f3;
     --bg-color: #ffffff;
     --bg-offset: #fafbfc;
+    --card-bg: #ffffff;
+    --card-hover-border: #cbd5e1;
+    --masthead-bg: #ffffff;
+    --badge-bg: #f8fafc;
+    --badge-border: #e2e8f0;
+    --badge-text: #334155;
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-mono: Monaco, Consolas, "Courier New", monospace;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] {
+    --primary-color: #62c3e0;
+    --primary-dark: #8adbf2;
+    --primary-light: #163340;
+    --text-color: #cbd5e1;
+    --text-muted: #94a3b8;
+    --heading-color: #f1f5f9;
+    --border-color: #334155;
+    --border-subtle: #1e293b;
+    --bg-color: #0f172a;
+    --bg-offset: #1e293b;
+    --card-bg: #1e293b;
+    --card-hover-border: #475569;
+    --masthead-bg: #0f172a;
+    --badge-bg: #1e293b;
+    --badge-border: #334155;
+    --badge-text: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 *, *::before, *::after {
@@ -105,7 +134,7 @@ img {
     left: 0;
     width: 100%;
     height: 70px;
-    background-color: #ffffff;
+    background-color: var(--masthead-bg);
     border-bottom: 1px solid var(--border-subtle);
     z-index: 1000;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
@@ -193,6 +222,37 @@ img {
     text-decoration: none !important;
 }
 
+/* Theme Toggle & Mobile Nav Buttons */
+.masthead__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-toggle-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    padding: 0;
+    color: var(--heading-color);
+    font-size: 1.05rem;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: rotate(15deg);
+}
+
 /* Mobile Nav Toggle Button */
 .nav-toggle-btn {
     display: none;
@@ -213,7 +273,7 @@ img {
 
 .nav-toggle-btn:hover,
 .nav-toggle-btn:focus {
-    background-color: #f1f5f9;
+    background-color: var(--bg-offset);
     outline: none;
 }
 
@@ -1724,7 +1784,7 @@ a.contact-card__value:hover {
         width: 100%;
         max-height: calc(100vh - 60px);
         overflow-y: auto;
-        background: #ffffff;
+        background: var(--card-bg);
         flex-direction: column;
         align-items: stretch;
         padding: 0.75rem 1.25rem 2rem;
@@ -2075,4 +2135,155 @@ a.contact-card__value:hover {
     .project-title {
         font-size: 0.92rem;
     }
+}
+
+/* ---------- Dark Mode Component Overrides ---------- */
+[data-theme="dark"] .author__avatar img {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .phd-badge {
+    background-color: #064e3b;
+    border-color: #047857;
+    color: #a7f3d0;
+}
+
+[data-theme="dark"] .publication__media img,
+[data-theme="dark"] .project-gallery img {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .talks-carousel {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .talks-slide {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .talks-slide img {
+    background: #0b0f19;
+}
+
+[data-theme="dark"] .carousel-nav-btn {
+    background: rgba(30, 41, 59, 0.92);
+    border-color: #475569;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .carousel-nav-btn:hover {
+    background: #1e293b;
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .carousel-dot {
+    background: #475569;
+}
+
+[data-theme="dark"] .carousel-dot.active {
+    background: var(--primary-color);
+}
+
+[data-theme="dark"] .contact-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .contact-card--primary {
+    background: linear-gradient(135deg, rgba(98, 195, 224, 0.12) 0%, #1e293b 100%);
+    border-color: rgba(98, 195, 224, 0.5);
+}
+
+[data-theme="dark"] .contact-card__label,
+[data-theme="dark"] .contact-card__subtext {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .contact-action-btn {
+    background: #0f172a;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .contact-action-btn:hover {
+    background: #163340;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .contact-form-container {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .contact-form-header p {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form textarea {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .contact-form input:focus,
+[data-theme="dark"] .contact-form textarea:focus {
+    background: #131d33;
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .contact-form .btn-secondary {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .contact-form .btn-secondary:hover {
+    background: #163340;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .author__urls li a,
+[data-theme="dark"] .author__urls li span {
+    background: #1e293b;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .pub-link-badge {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .pub-link-badge:hover {
+    background: var(--primary-color);
+    color: #0f172a;
+}
+
+[data-theme="dark"] .page__footer {
+    border-color: #334155;
+}
+
+[data-theme="dark"] .page__footer-follow .social-icons a {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .page__footer-follow .social-icons a:hover {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .constellation-tooltip {
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid #334155;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .constellation-tooltip::after {
+    border-color: rgba(15, 23, 42, 0.96) transparent transparent transparent;
 }
