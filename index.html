@@ -25,7 +25,7 @@
     <meta http-equiv="Expires" content="0">
 
     <!-- Main Stylesheet (Versioned to break browser caching) -->
-    <link rel="stylesheet" href="style.css?v=4.4">
+    <link rel="stylesheet" href="style.css?v=4.5">
 <script>
         (function() {
             var savedTheme = localStorage.getItem('theme');
@@ -51,7 +51,7 @@
                         <li><a href="#news">News</a></li>
                         <li><a href="#publications">Publications</a></li>
                         <li><a href="#talks">Talks</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                     <div class="masthead__actions">
                         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle dark/light mode" title="Toggle theme">
@@ -321,118 +321,6 @@
 
                         <div class="carousel-dots" id="carousel-dots"></div>
                     </div>
-
-                    <!-- Contact Section -->
-                    <h2 id="contact" class="section-anchor">Get In Touch</h2>
-                    <p class="contact-intro">
-                        I welcome collaborative research inquiries, academic discussions, and PhD advisor interactions in Adaptive ML, Concept Drift, Swarm Intelligence, and Computer Vision. Feel free to send a brief message below or reach out directly.
-                    </p>
-
-                    <div class="contact-wrapper">
-                        <!-- Direct Contact Cards -->
-                        <div class="contact-info-cards">
-                            <!-- Primary Email Card -->
-                            <div class="contact-card contact-card--primary">
-                                <div class="contact-card__icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-card__content">
-                                    <span class="contact-card__label">Primary Email</span>
-                                    <a href="mailto:albertankad@gmail.com" class="contact-card__value">albertankad@gmail.com</a>
-                                    <div class="contact-card__actions">
-                                        <a href="mailto:albertankad@gmail.com" class="contact-action-btn" title="Open Mail App">
-                                            <i class="fas fa-arrow-up-right-from-square"></i> Send Email
-                                        </a>
-                                        <button type="button" class="contact-action-btn copy-email-btn" data-email="albertankad@gmail.com" title="Copy to clipboard">
-                                            <i class="fas fa-copy"></i> <span>Copy</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Institutional / Student Email -->
-                            <div class="contact-card">
-                                <div class="contact-card__icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="contact-card__content">
-                                    <span class="contact-card__label">Institutional Email</span>
-                                    <a href="mailto:aadodoo003@st.ug.edu.gh" class="contact-card__value">aadodoo003@st.ug.edu.gh</a>
-                                </div>
-                            </div>
-
-                            <!-- Phone & WhatsApp -->
-                            <div class="contact-card">
-                                <div class="contact-card__icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="contact-card__content">
-                                    <span class="contact-card__label">Phone &amp; WhatsApp</span>
-                                    <a href="tel:+233548094935" class="contact-card__value">+233 54 809 4935</a>
-                                    <div class="contact-card__actions">
-                                        <a href="https://wa.me/233548094935" target="_blank" rel="noopener" class="contact-action-btn whatsapp-btn">
-                                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Location & Availability -->
-                            <div class="contact-card">
-                                <div class="contact-card__icon">
-                                    <i class="fas fa-location-dot"></i>
-                                </div>
-                                <div class="contact-card__content">
-                                    <span class="contact-card__label">Location &amp; Timezone</span>
-                                    <span class="contact-card__value">Accra, Ghana &bull; UTC+0</span>
-                                    <span class="contact-card__subtext">Open to worldwide academic collaborations &amp; Fall '27 PhD opportunities</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Quick Email Form -->
-                        <div class="contact-form-container">
-                            <div class="contact-form-header">
-                                <h3><i class="fas fa-paper-plane"></i> Send a Quick Message</h3>
-                                <p>Write a brief note below to send directly to <strong>albertankad@gmail.com</strong>.</p>
-                            </div>
-
-                            <form id="contact-quick-form" class="contact-form">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="contact-name">Your Name <span class="required">*</span></label>
-                                        <input type="text" id="contact-name" name="name" required placeholder="e.g. Dr. Alex Smith">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contact-email">Your Email <span class="required">*</span></label>
-                                        <input type="email" id="contact-email" name="email" required placeholder="e.g. alex@university.edu">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="contact-subject">Subject</label>
-                                    <input type="text" id="contact-subject" name="subject" placeholder="e.g. Research Collaboration / PhD Opportunity" value="Research Discussion / Inquiry">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="contact-message">Message <span class="required">*</span></label>
-                                    <textarea id="contact-message" name="message" rows="4" required placeholder="Briefly introduce yourself or what you'd like to discuss..."></textarea>
-                                </div>
-
-                                <div class="form-buttons">
-                                    <button type="submit" class="btn-send-email">
-                                        <i class="fas fa-paper-plane"></i> Send via Email App
-                                    </button>
-                                    <button type="button" id="btn-send-gmail" class="btn-send-gmail">
-                                        <i class="fab fa-google"></i> Open in Gmail
-                                    </button>
-                                </div>
-                                <p class="form-help-text">
-                                    <i class="fas fa-shield-alt"></i> Opens your email composer pre-filled and ready to send directly to <code>albertankad@gmail.com</code>.
-                                </p>
-                            </form>
-                        </div>
-                    </div>
                 </section>
 
                 <footer class="page__meta"></footer>
@@ -464,7 +352,7 @@
     </div>
 
     <!-- JavaScript Interactions (Versioned to break browser caching) -->
-    <script src="script.js?v=4.4"></script>
+    <script src="script.js?v=4.5"></script>
 </body>
 
 </html>

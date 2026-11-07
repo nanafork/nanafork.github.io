@@ -204,9 +204,11 @@ img {
     white-space: nowrap;
 }
 
-.visible-links li a:hover {
+.visible-links li a:hover,
+.visible-links li a.active-nav {
     color: var(--primary-color);
     text-decoration: none;
+    font-weight: 600;
 }
 
 .cv-link-btn {
