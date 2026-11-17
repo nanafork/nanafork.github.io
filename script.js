@@ -457,8 +457,41 @@ function initConstellationGraph() {
         'C2.6 8.2 2.6 9.3 2.6 9.9 C2.6 10.2 2.8 10.6 3.4 10.5 C7.8 9 11 4.9 11 0 C11 -6.1 6.1 -11 0 -11 Z'
     );
 
+    // Center anchor for gentle constellation rotation & subtle organic motion
+    const centerX = 120;
+    const centerY = 105;
+    let rotationAngle = 0;
+    const rotationSpeed = 0.0035; // Slow, elegant ambient rotation (~90 seconds per revolution)
+
+    // Precalculate base home polar coordinates relative to constellation center
+    nodes.forEach(node => {
+        const dx = node.homeX - centerX;
+        const dy = node.homeY - centerY;
+        node.baseRadius = Math.hypot(dx, dy);
+        node.baseAngle = Math.atan2(dy, dx);
+    });
+
     // Physics Simulation Update Step
     function updatePhysics() {
+        // Slowly advance the ambient rotation angle when no node is being dragged
+        if (!activeNode) {
+            rotationAngle += rotationSpeed;
+            if (rotationAngle > Math.PI * 2) {
+                rotationAngle -= Math.PI * 2;
+            }
+        }
+
+        // Dynamically compute orbited home position for each node
+        for (let i = 0; i < nodes.length; i++) {
+            const node = nodes[i];
+            const currentAngle = node.baseAngle + rotationAngle;
+            // Subtle radial breathing (+/- 1.5px) for gentle organic dazzle
+            const pulse = Math.sin(rotationAngle * 2 + i * 1.25) * 1.5;
+            const r = node.baseRadius + pulse;
+            node.homeX = centerX + Math.cos(currentAngle) * r;
+            node.homeY = centerY + Math.sin(currentAngle) * r;
+        }
+
         // 1. Hooke's Law Spring forces between connected nodes
         for (let i = 0; i < edges.length; i++) {
             const edge = edges[i];
@@ -564,11 +597,16 @@ function initConstellationGraph() {
             const node = nodes[i];
             ctx.save();
 
-            // Drop shadow for interactive feedback
+            // Subtle luminous pulse / soft dazzle glow when idle, pronounced on hover/drag
+            const ambientPulse = Math.sin(rotationAngle * 3 + i * 1.3) * 0.5 + 0.5; // 0 to 1
             if (node.isDragging || node.isHovered) {
                 ctx.shadowColor = isDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.2)';
                 ctx.shadowBlur = 10;
                 ctx.shadowOffsetY = 3;
+            } else {
+                ctx.shadowColor = node.ringColor;
+                ctx.shadowBlur = 4 + ambientPulse * 5; // 4px to 9px soft breathing halo
+                ctx.shadowOffsetY = 1;
             }
 
             // Clean inner fill (adapts to light/dark background)
