@@ -473,8 +473,9 @@ function initConstellationGraph() {
 
     // Physics Simulation Update Step
     function updatePhysics() {
-        // Slowly advance the ambient rotation angle when no node is being dragged
-        if (!activeNode) {
+        // Pause the ambient rotation when user is hovering any node, hovering the canvas, or dragging
+        const isInteracting = activeNode || isCanvasHovered || nodes.some(n => n.isHovered);
+        if (!isInteracting) {
             rotationAngle += rotationSpeed;
             if (rotationAngle > Math.PI * 2) {
                 rotationAngle -= Math.PI * 2;
@@ -713,6 +714,7 @@ function initConstellationGraph() {
 
     // Pointer Interaction & Drag Physics
     let activeNode = null;
+    let isCanvasHovered = false;
     let pointerDownPos = { x: 0, y: 0 };
     let hasDragged = false;
 
@@ -811,9 +813,14 @@ function initConstellationGraph() {
         }
     }
 
+    canvas.addEventListener('pointerenter', () => {
+        isCanvasHovered = true;
+    });
+
     canvas.addEventListener('pointerup', handlePointerRelease);
     canvas.addEventListener('pointercancel', handlePointerRelease);
     canvas.addEventListener('pointerleave', () => {
+        isCanvasHovered = false;
         if (!activeNode) {
             for (let i = 0; i < nodes.length; i++) {
                 nodes[i].isHovered = false;
